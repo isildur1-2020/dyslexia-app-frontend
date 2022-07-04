@@ -1,0 +1,11 @@
+.Layout {
+    height: 100vh;
+    &__logo {
+        width: 180px;
+        & >img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
