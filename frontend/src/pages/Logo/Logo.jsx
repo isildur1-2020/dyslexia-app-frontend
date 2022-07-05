@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
+import { MainContext } from "../../contexts/MainContext";
 import { useNavigate } from "react-router-dom";
 import logoSrc from "../../assets/logo.png";
 import styles from "./styles.module.scss";
@@ -6,8 +7,18 @@ import styles from "./styles.module.scss";
 export const Logo = () => {
   const logoRef = useRef();
   const navigate = useNavigate();
+  const { state, setState } = useContext(MainContext);
+  const { questions } = state;
+  const firstPage = !questions[0] ? "/sendData" : `/${questions[0]}`;
+  const currentQuestion = questions[0] ?? null;
 
-  const nextPage = () => navigate("/firstPage");
+  const nextPage = () => {
+    setState({
+      ...state,
+      currentQuestion,
+    });
+    navigate(firstPage);
+  };
 
   const hiddenLogo = () => {
     logoRef.current.classList.remove("animate__fadeIn");

@@ -1,19 +1,49 @@
-import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { MainContext } from "../../contexts/MainContext";
 import styles from "./styles.module.scss";
 
 export const Buttons = () => {
+  const { state, setState } = useContext(MainContext);
+  const { questions, currentQuestion } = state;
   const navigate = useNavigate();
+
+  const handlePrev = () => {
+    if (currentQuestion === null) return;
+    const prevQuestion = currentQuestion - 1;
+    const index = questions.indexOf(prevQuestion);
+    if (index === -1) return;
+    const prevPage = questions[index];
+    setState({
+      ...state,
+      currentQuestion: prevPage,
+    });
+    navigate(`/${prevPage}`);
+  };
+
+  const handleNext = () => {
+    if (currentQuestion === null) return;
+    const nextQuestion = currentQuestion + 1;
+    const index = questions.indexOf(nextQuestion);
+    if (index === -1) return;
+    const nextPage = questions[index];
+    setState({
+      ...state,
+      currentQuestion: nextPage,
+    });
+    navigate(`/${nextPage}`);
+  };
+
   return (
     <Box className={styles.Buttons}>
-      <IconButton>
+      <IconButton onClick={handlePrev}>
         <ArrowBackIcon color="primary" sx={{ fontSize: 56 }} fontSize="large" />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={handleNext}>
         <ArrowForwardIcon color="primary" sx={{ fontSize: 56 }} />
       </IconButton>
     </Box>
