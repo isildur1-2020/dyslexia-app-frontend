@@ -41,14 +41,14 @@ export const english = {
   subtitle5: "Father, mother, sister or brother",
   // SIXTH PAGE
   title6: "Please read the following paragraph",
-  content6:
+  list6: [
     "The cat is a real dog up down down below above dollar the man went below inside out and we left lo below. when can he go come beyond red green sunshine after leaving home before school monday wednesday the dollar currency can often go come to every country garden forest I believe but cannot sing write go after red green without this reading everbody has one five bellow the wall above the cealing whatever you may want to see go come and play work dollar animals play cat dog go play everbory have fun sad yes red blue orange now later often can dogs plays cats scratch now you can see only one five everyday was coming going in the house window everybody likes candy whenever yellow good I believe this is not for you me everybody has wants can be yes",
-  list6: false,
+  ],
   color6: "#6FFB71",
   // SEVENTH PAGE
   title7: "Please read the following paragraph",
-  content7:
+  list7: [
     "The cat is a real dog up down down below above dollar the man went below inside out and we left lo below. when can he go come beyond red green sunshine after leaving home before school monday wednesday the dollar currency can often go come to every country garden forest I believe but cannot sing write go after red green without this reading everbody has one five bellow the wall above the cealing whatever you may want to see go come and play work dollar animals play cat dog go play everbory have fun sad yes red blue orange now later often can dogs plays cats scratch now you can see only one five everyday was coming going in the house window everybody likes candy whenever yellow good I believe this is not for you me everybody has wants can be yes",
-  list7: false,
+  ],
   color7: "#FF1C20",
 };

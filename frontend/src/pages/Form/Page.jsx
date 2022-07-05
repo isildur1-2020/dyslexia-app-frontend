@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
 import Input from "@mui/material/Input";
-import { InputLabel } from "@mui/material";
+import { Divider, InputLabel, Typography } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -22,11 +22,17 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
     currentLanguaje,
   } = state;
   return (
-    <Layout title="Complete the form">
+    <Layout title="">
       <Box mt={6}>
         <div className={styles.Form}>
           <form onSubmit={handleSubmit}>
             <div className={styles.Form__container}>
+              <Box mb={8}>
+                <Typography align="center" variant="h5">
+                  Complete the form
+                </Typography>
+                <Divider />
+              </Box>
               <Box mb={2}>
                 <InputLabel htmlFor="user-name">
                   {currentLanguaje?.name}
@@ -109,7 +115,7 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
                 </RadioGroup>
               </FormControl>
 
-              <Box mt={6}>
+              <Box mt={4} mb={8}>
                 <Button
                   disabled={!isCompleted}
                   type="submit"

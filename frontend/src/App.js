@@ -5,13 +5,13 @@ import { Login } from "./pages/Login/Login";
 import { ChooseLang } from "./pages/ChooseLang/ChooseLang";
 import { Logo } from "./pages/Logo/Logo";
 import { Form } from "./pages/Form/Form";
-import { FirstPage } from "./pages/FirstPage/FirstPage";
-import { SecondPage } from "./pages/SecondPage/SecondPage";
-import { ThirdPage } from "./pages/ThirdPage/ThirdPage";
-import { FourthPage } from "./pages/FourthPage/FourthPage";
-import { FifthPage } from "./pages/FifthPage/FifthPage";
-import { SixthPage } from "./pages/SixthPage/SixthPage";
-import { SevenPage } from "./pages/SevenPage/SevenPage";
+import { FirstPage } from "./pages/FirstPage";
+import { SecondPage } from "./pages/SecondPage";
+import { ThirdPage } from "./pages/ThirdPage";
+import { FourthPage } from "./pages/FourthPage";
+import { FifthPage } from "./pages/FifthPage";
+import { SixthPage } from "./pages/SixthPage";
+import { SeventhPage } from "./pages/SeventhPage";
 import { languajes } from "./languajes/languajes";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -47,14 +47,14 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/logo" element={<Logo />} />
           <Route path="/form" element={<Form />} />
-          <Route path="/firstPage" element={<FirstPage />} />
-          <Route path="/secondPage" element={<SecondPage />} />
-          <Route path="/thirdPage" element={<ThirdPage />} />
-          <Route path="/fourthPage" element={<FourthPage />} />
-          <Route path="/fifthPage" element={<FifthPage />} />
-          <Route path="/sixthPage" element={<SixthPage />} />
-          <Route path="/sevenPage" element={<SevenPage />} />
-          <Route path="*" element={<ChooseLang />} />
+          <Route path="/1" element={<FirstPage />} />
+          <Route path="/2" element={<SecondPage />} />
+          <Route path="/3" element={<ThirdPage />} />
+          <Route path="/4" element={<FourthPage />} />
+          <Route path="/5" element={<FifthPage />} />
+          <Route path="/6" element={<SixthPage />} />
+          <Route path="/7" element={<SeventhPage />} />
+          <Route path="*" element={<h1>Not found - 404</h1>} />
         </Routes>
       </BrowserRouter>
     </MainContext.Provider>

@@ -6,10 +6,12 @@ import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import Avatar from "@mui/material/Avatar";
 import Input from "@mui/material/Input";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { InputLabel } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import { InputLabel, Typography } from "@mui/material";
 
 export const Page = ({
   handleSubmit,
@@ -20,10 +22,26 @@ export const Page = ({
 }) => {
   const { username, password, showPassword, currentLanguaje } = state;
   return (
-    <Layout title="Login">
+    <Layout title="">
       <div className={styles.Login}>
         <form onSubmit={handleSubmit}>
           <div className={styles.Login__container}>
+            <Box
+              mb={8}
+              fullWidth
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Avatar sx={{ width: 56, height: 56 }}>
+                <PersonIcon fontSize="large" />
+              </Avatar>
+              <Box mt={2}>
+                <Typography component="span" variant="h5">
+                  Login
+                </Typography>
+              </Box>
+            </Box>
             <Box mb={4}>
               <InputLabel htmlFor="user-username">
                 {currentLanguaje.user}

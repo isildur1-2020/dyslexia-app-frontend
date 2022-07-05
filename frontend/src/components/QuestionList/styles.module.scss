@@ -1,0 +1,11 @@
+.QuestionList {
+  &__list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    & > ul {
+      width: 70%;
+      padding: 32px 64px;
+    }
+  }
+}

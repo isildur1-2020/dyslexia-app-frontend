@@ -3,25 +3,28 @@ import PropTypes from "prop-types";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import { Layout } from "../../components/Layout/Layout";
 import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import styles from "./styles.module.scss";
+import { Typography } from "@mui/material";
 
 export const Page = ({ languajes, state, handleChange, handleClick }) => (
-  <Layout title="Choose your languaje">
+  <Layout title="">
     <div className={styles.ChooseLang}>
+      <Box mb={3}>
+        <Typography variant="h5">Choose your languaje</Typography>
+      </Box>
       <div className={styles.ChooseLang__container}>
         <TextField
           select
           id="languaje"
-          label="Select"
           name="languaje"
           value={state.languaje}
           onChange={handleChange}
           fullWidth
         >
-          <MenuItem value={0}>Choose your languaje...</MenuItem>
+          <MenuItem value={0}>Select...</MenuItem>
           {languajes.length > 0 &&
             languajes.map((lang) => (
               <MenuItem key={lang} value={lang}>
@@ -29,15 +32,15 @@ export const Page = ({ languajes, state, handleChange, handleClick }) => (
               </MenuItem>
             ))}
         </TextField>
-        <Box>
-          <IconButton
-            size="large"
-            aria-label="next"
-            component="span"
+        <Box ml={1}>
+          <Button
+            disabled={!state.languaje}
+            variant="outlined"
             onClick={handleClick}
+            sx={{ height: 56 }}
           >
             <KeyboardTabIcon />
-          </IconButton>
+          </Button>
         </Box>
       </div>
     </div>
