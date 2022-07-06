@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { MainContext } from "../../contexts/MainContext";
+import { headers } from "../../utils/headers";
 import { Page } from "./Page";
 
 export const Login = () => {
@@ -22,10 +23,16 @@ export const Login = () => {
       ev.preventDefault();
       const { username, password } = state;
       if (!username || !password) return;
-      const { data } = await axios.post(BACK_URL + "/login", {
-        email: username,
-        password,
-      });
+      const { data } = await axios.post(
+        BACK_URL + "/login",
+        {
+          email: username,
+          password,
+        },
+        {
+          headers,
+        }
+      );
       const { error, isAuth } = data;
       if (error) {
         setState({

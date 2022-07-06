@@ -20,7 +20,9 @@ export const SendData = ({
 
   const sendFullData = async (data) => {
     if (!name) return;
-    await axios.post(BACK_URL + "/data", data);
+    await axios.post(BACK_URL + "/data", data, {
+      headers,
+    });
   };
 
   useEffect(() => {
