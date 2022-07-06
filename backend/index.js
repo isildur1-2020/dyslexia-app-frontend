@@ -36,7 +36,7 @@ app.post("/data", (req, res) => {
 
   var mailOptions = {
     from: "dyslexiaapptest@gmail.com",
-    to: "tapitarias@gmail.com",
+    to: "contacto.dyslexiatest@gmail.com",
     subject: "Dyslexia App",
     text: `
       LINK CAMERA RECORD ${videoLink}
