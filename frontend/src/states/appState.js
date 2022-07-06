@@ -18,8 +18,8 @@ export const appState = {
   // CURRENT LANGUAJE
   currentLanguaje: languajes["english"],
   // AUTH
-  isAdminAuth: true,
-  isUserAuth: true,
+  isAdminAuth: false,
+  isUserAuth: false,
   questions: [1, 2, 3, 4, 5, 6, 7],
   currentQuestion: null,
   // TIME PER QUESTION

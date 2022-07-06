@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { MainContext } from "../../contexts/MainContext";
 import { useForm } from "../../hooks/useForm";
@@ -10,8 +10,17 @@ export const Form = () => {
   const config = { slice: true, start: 5, end: 10 };
   const { handleChange, isCompleted } = useForm(state, setState, config);
 
+  useEffect(() => {
+    const { isUserAuth } = state;
+    if (isUserAuth) navigate("/logo");
+  }, []);
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    setState({
+      ...state,
+      isUserAuth: true,
+    });
     navigate("/logo");
   };
 

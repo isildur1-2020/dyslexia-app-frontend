@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import axios from "axios";
+import { BACK_URL } from "../../config";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { MainContext } from "../../contexts/MainContext";
@@ -10,11 +12,37 @@ export const Login = () => {
   const config = { slice: true, start: 2, end: 3 };
   const { handleChange, isCompleted } = useForm(state, setState, config);
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    const { username, password } = state;
-    if (!username || !password) return;
-    navigate("/form");
+  useEffect(() => {
+    const { isAdminAuth } = state;
+    if (isAdminAuth) navigate("/form");
+  }, []);
+
+  const handleSubmit = async (ev) => {
+    try {
+      ev.preventDefault();
+      const { username, password } = state;
+      if (!username || !password) return;
+      const { data } = await axios.post(BACK_URL + "/login", {
+        email: username,
+        password,
+      });
+      const { error, isAuth } = data;
+      if (error) {
+        setState({
+          ...state,
+          username: "",
+          password: "",
+        });
+      } else {
+        setState({
+          ...state,
+          isAdminAuth: true,
+        });
+        navigate("/form");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleShowPassword = () =>

@@ -23,6 +23,7 @@ import { clocksState } from "./states/clocksState";
 const App = () => {
   const [state, setState] = useState(appState);
   const [clocks, setClocks] = useState(clocksState(240));
+
   const {
     status: statusVideo,
     startRecording: startRecordingVideo,
