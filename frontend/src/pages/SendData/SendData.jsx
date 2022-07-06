@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
 import { Box, Typography } from "@mui/material";
 import { MainContext } from "../../contexts/MainContext";
+import { headers } from "../../utils/headers";
 import { BACK_URL } from "../../config";
 
 export const SendData = ({
