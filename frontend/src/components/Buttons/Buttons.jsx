@@ -5,9 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { MainContext } from "../../contexts/MainContext";
+import { usePages } from "../../hooks/usePages";
 import styles from "./styles.module.scss";
 
 export const Buttons = () => {
+  const { isPrevPage, isNextPage } = usePages();
   const { state, setState } = useContext(MainContext);
   const { questions, currentQuestion } = state;
   const navigate = useNavigate();
@@ -39,12 +41,19 @@ export const Buttons = () => {
   };
 
   return (
-    <Box className={styles.Buttons}>
-      <IconButton onClick={handlePrev}>
-        <ArrowBackIcon color="primary" sx={{ fontSize: 56 }} fontSize="large" />
+    <Box mb={8} className={styles.Buttons}>
+      <IconButton disabled={!isPrevPage} onClick={handlePrev}>
+        <ArrowBackIcon
+          color={!isPrevPage ? "disabled" : "primary"}
+          sx={{ fontSize: 56 }}
+          fontSize="large"
+        />
       </IconButton>
-      <IconButton onClick={handleNext}>
-        <ArrowForwardIcon color="primary" sx={{ fontSize: 56 }} />
+      <IconButton disabled={!isNextPage} onClick={handleNext}>
+        <ArrowForwardIcon
+          color={!isNextPage ? "disabled" : "primary"}
+          sx={{ fontSize: 56 }}
+        />
       </IconButton>
     </Box>
   );

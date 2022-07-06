@@ -8,9 +8,9 @@ import { langsToUpper } from "../../adapters/languajes";
 import { Page } from "./Page";
 
 export const ChooseLang = () => {
+  const navigate = useNavigate();
   const { isMounted } = useIsMounted();
   const [langs, setLangs] = useState([]);
-  const navigate = useNavigate();
   const { state, setState } = useContext(MainContext);
   const { handleChange } = useForm(state, setState);
 
@@ -36,12 +36,12 @@ export const ChooseLang = () => {
 
   return (
     <Page
-      languajes={langs}
       state={state}
+      languajes={langs}
       setState={setState}
       navigate={navigate}
-      handleChange={handleChange}
       handleClick={handleClick}
+      handleChange={handleChange}
     />
   );
 };

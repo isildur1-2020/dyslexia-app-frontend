@@ -8,8 +8,9 @@ export const SixthPage = () => {
   const { title6, list6, borderColor } = currentLanguaje;
   return (
     <QuestionList
-      title={title6}
+      clockID={6}
       list={list6}
+      title={title6}
       borderColor={borderColor}
       backgroundColor="#6FFB71"
       fontSize="body1"

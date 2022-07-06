@@ -9,11 +9,13 @@ import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import styles from "./styles.module.scss";
 import { Typography } from "@mui/material";
 
-export const Page = ({ languajes, state, handleChange, handleClick }) => (
+export const Page = ({ state, languajes, handleClick, handleChange }) => (
   <Layout title="">
     <div className={styles.ChooseLang}>
       <Box mb={3}>
-        <Typography variant="h5">Choose your languaje</Typography>
+        <Typography variant="h5" component="span">
+          Choose your languaje
+        </Typography>
       </Box>
       <div className={styles.ChooseLang__container}>
         <TextField
@@ -43,6 +45,20 @@ export const Page = ({ languajes, state, handleChange, handleClick }) => (
           </Button>
         </Box>
       </div>
+      <Box mt={4}>
+        <Typography align="center" variant="h6" component="p">
+          Time per question (seconds)
+        </Typography>
+        <TextField
+          type="number"
+          id="secondsPerQuestion"
+          name="secondsPerQuestion"
+          placeholder="default - 240 seconds"
+          value={state.secondsPerQuestion}
+          onChange={handleChange}
+          sx={{ width: 300 }}
+        />
+      </Box>
     </div>
   </Layout>
 );

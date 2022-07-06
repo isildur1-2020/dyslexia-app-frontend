@@ -7,5 +7,12 @@ export const FifthPage = () => {
   const { state } = useContext(MainContext);
   const { currentLanguaje } = state;
   const { title5, subtitle5 } = currentLanguaje;
-  return <QuestionCanvas title={title5} subtitle={subtitle5} Canvas={Canvas} />;
+  return (
+    <QuestionCanvas
+      clockID={5}
+      title={title5}
+      Canvas={Canvas}
+      subtitle={subtitle5}
+    />
+  );
 };

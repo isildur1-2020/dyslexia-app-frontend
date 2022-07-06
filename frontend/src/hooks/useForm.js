@@ -18,5 +18,6 @@ export const useForm = (state, setState, config = {}) => {
       [name]: value,
     });
   };
+
   return { handleChange, isCompleted };
 };
