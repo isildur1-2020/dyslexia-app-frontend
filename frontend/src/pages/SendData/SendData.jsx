@@ -81,7 +81,6 @@ export const SendData = ({
       const { data } = await sendData(formData);
       setLinkScreenRecord(data.URL);
       setIsLinkScreenSend(true);
-      console.log(data);
     }
     sendRecord();
   }, [mediaBlobUrlScreen]);
@@ -102,16 +101,18 @@ export const SendData = ({
         justifyContent: "center",
       }}
     >
-      <Typography variant="h4" component="li">
-        CAMERA RECORD:
-        <a href={BACK_URL + linkVideoRecord} target="_blank"></a>
+      <Typography variant="h4" component="span">
+        <a href={BACK_URL + linkVideoRecord} target="_blank">
+          -{">"} CAMERA RECORD
+        </a>
       </Typography>
-      <Typography variant="h4" component="li">
-        SCREEN RECORD:
-        <a href={BACK_URL + linkScreenRecord} target="_blank"></a>
+      <Typography variant="h4" component="span">
+        <a href={BACK_URL + linkScreenRecord} target="_blank">
+          -{">"} SCREEN RECORD:
+        </a>
       </Typography>
       {isEmailSend && (
-        <Typography variant="h5" component="li">
+        <Typography variant="h5" component="span">
           Data sent...
         </Typography>
       )}
