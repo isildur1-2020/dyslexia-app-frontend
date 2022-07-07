@@ -73,23 +73,31 @@ app.post("/upload", upload.single("record"), (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const isEmailExist = users.find((user) => user.email === email);
-  if (!isEmailExist)
-    return res.status(200).json({
-      isAuth: false,
-      error: "Email inexistente",
+  try {
+    const { email, password } = req.body;
+    const isEmailExist = users.find((user) => user.email === email);
+    if (!isEmailExist)
+      return res.status(200).json({
+        isAuth: false,
+        error: "Email inexistente",
+      });
+    const isPasswordCorrect = users.find((user) => user.password === password);
+    if (!isPasswordCorrect)
+      return res.status(200).json({
+        isAuth: false,
+        error: "Contraseña incorrecta",
+      });
+    res.status(200).json({
+      isAuth: true,
+      error: false,
     });
-  const isPasswordCorrect = users.find((user) => user.password === password);
-  if (!isPasswordCorrect)
-    return res.status(200).json({
+  } catch (err) {
+    console.log(err);
+    res.status(200).json({
       isAuth: false,
-      error: "Contraseña incorrecta",
+      error: true,
     });
-  res.status(200).json({
-    isAuth: true,
-    error: false,
-  });
+  }
 });
 
 app.listen(app.get("PORT"), () => {
