@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { MainContext } from "../../contexts/MainContext";
 import { headers } from "../../utils/headers";
 import { BACK_URL } from "../../config";
+import logo from "../../assets/logo.png";
+import styles from "./styles.module.scss";
 
 export const SendData = ({
   stopRecordingVideo,
@@ -11,6 +13,7 @@ export const SendData = ({
   mediaBlobUrlVideo,
   mediaBlobUrlScreen,
 }) => {
+  const navigate = useNavigate();
   const { state, setState } = useContext(MainContext);
   const [linkVideoRecord, setLinkVideoRecord] = useState("");
   const [linkScreenRecord, setLinkScreenRecord] = useState("");
@@ -55,6 +58,15 @@ export const SendData = ({
   };
 
   useEffect(() => {
+    if (!isEmailSend) return;
+    setState({
+      ...state,
+      isUserAuth: false,
+    });
+    navigate("/form");
+  }, [isEmailSend]);
+
+  useEffect(() => {
     if (isLinkVideoSend) return;
     if (!mediaBlobUrlVideo) return;
 
@@ -94,31 +106,8 @@ export const SendData = ({
   }, []);
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Typography variant="h4" component="span">
-        <a href={BACK_URL + linkVideoRecord} target="_blank">
-          -{">"} CAMERA RECORD
-        </a>
-      </Typography>
-      <Typography variant="h4" component="span">
-        <a href={BACK_URL + linkScreenRecord} target="_blank">
-          -{">"} SCREEN RECORD:
-        </a>
-      </Typography>
-      {isEmailSend && (
-        <Typography variant="h5" component="span">
-          Data sent...
-        </Typography>
-      )}
-    </Box>
+    <div className={styles.SendData}>
+      <img src={logo} alt="dyslexia-app" title="dyslexia-app" />
+    </div>
   );
 };
