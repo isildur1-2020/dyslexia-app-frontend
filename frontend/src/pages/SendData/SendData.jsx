@@ -62,12 +62,12 @@ export const SendData = ({
     setState({
       ...state,
       isUserAuth: false,
-      age: "",
-      bloodType: "",
-      dateOfBirth: null,
-      gender: null,
       name: "",
+      age: "",
+      dateOfBirth: "",
       nationality: "",
+      bloodType: "",
+      gender: null,
     });
     navigate("/form");
   }, [isEmailSend]);
