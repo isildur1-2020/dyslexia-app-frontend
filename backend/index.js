@@ -6,6 +6,8 @@ const cors = require("cors");
 const express = require("express");
 const nodemailer = require("nodemailer");
 const { users } = require("./src/database/users");
+const { config } = require("dotenv");
+config();
 
 const app = express();
 // SETTINGS
@@ -29,14 +31,14 @@ app.post("/data", (req, res) => {
   var transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-      user: "dyslexiaapptest@gmail.com",
-      pass: "cqamijbhsimygdwj",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   var mailOptions = {
-    from: "dyslexiaapptest@gmail.com",
-    to: "tapitarias@gmail.com",
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_DESTINY,
     subject: "Dyslexia App",
     text: `
       LINK CAMERA RECORD ${videoLink}
