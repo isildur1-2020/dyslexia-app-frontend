@@ -1,9 +1,5 @@
 const users = [
   {
-    email: "prueba",
-    password: "prueba",
-  },
-  {
     email: "drshassanain@saudilvc.com",
     password: "Dr5792",
   },
