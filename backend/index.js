@@ -11,7 +11,7 @@ config();
 
 const app = express();
 // SETTINGS
-app.set("PORT", process.env.PORT || 35600);
+app.set("PORT", process.env.PORT || 62345);
 const publicPath = path.join(__dirname, "public");
 // MIDDLEWARES
 app.use(express.json());
