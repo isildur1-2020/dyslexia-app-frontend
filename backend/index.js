@@ -12,7 +12,7 @@ config();
 const app = express();
 // SETTINGS
 app.set("PORT", process.env.PORT || 62345);
-const publicPath = "/var/www/dyslexia-test";
+const publicPath = path.join(__dirname, "public");
 // MIDDLEWARES
 app.use(express.json());
 app.use(cors());
