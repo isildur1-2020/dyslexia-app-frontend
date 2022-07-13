@@ -12,7 +12,7 @@ config();
 const app = express();
 // SETTINGS
 app.set("PORT", process.env.PORT || 62345);
-const publicPath = path.join(__dirname, "public");
+const publicPath = "/var/www/dyslexia-test";
 // MIDDLEWARES
 app.use(express.json());
 app.use(cors());
@@ -20,9 +20,13 @@ app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(publicPath));
 
-const upload = multer({
-  dest: publicPath,
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, publicPath);
+  },
 });
+
+var upload = multer({ storage });
 
 app.post("/data", (req, res) => {
   const { userData, videoLink, screenLink } = req.body;
