@@ -16,7 +16,7 @@ const publicPath = path.join(__dirname, "public");
 // MIDDLEWARES
 app.use(express.json());
 app.use(cors());
-// app.use(morgan("combined"));
+app.use(morgan("combined"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(publicPath));
 
