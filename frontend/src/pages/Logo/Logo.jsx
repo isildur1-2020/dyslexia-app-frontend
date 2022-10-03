@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import { useNavigate } from "react-router-dom";
-import logoSrc from "../../assets/logo.png";
-import styles from "./styles.module.scss";
+import { Page } from "./Page";
 
 export const Logo = () => {
   const logoRef = useRef();
@@ -23,19 +22,14 @@ export const Logo = () => {
   const hiddenLogo = () => {
     logoRef.current.classList.remove("animate__fadeIn");
     logoRef.current.classList.add("animate__fadeOut");
-    setTimeout(nextPage, 1500);
+    setTimeout(nextPage, 1000);
   };
 
+  // to re direct on animation finished
   useEffect(() => {
     logoRef.current.classList.add("animate__fadeIn");
     setTimeout(hiddenLogo, 2000);
   }, []);
 
-  return (
-    <div className={styles.Logo}>
-      <div className={`${styles.Logo__img} animate__animated`} ref={logoRef}>
-        <img src={logoSrc} title="dyslexia-app" alt="dyslexia-app" />
-      </div>
-    </div>
-  );
+  return <Page ref={logoRef} />;
 };

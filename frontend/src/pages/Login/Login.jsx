@@ -1,73 +1,62 @@
 import axios from "axios";
-import { BACK_URL } from "../../config";
-import React, { useContext, useEffect } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { MainContext } from "../../contexts/MainContext";
-import { headers } from "../../utils/headers";
+import { useIsMounted } from "../../hooks/useIsMounted";
+import { setIsAuth } from "../../redux/actions/main";
+import { BACK_URL } from "../../axios/axiosInstance";
 import { Page } from "./Page";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { state, setState } = useContext(MainContext);
-  const config = { slice: true, start: 2, end: 3 };
-  const { handleChange, isCompleted } = useForm(state, setState, config);
+  const dispatch = useDispatch();
+  const isMounted = useIsMounted();
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
+  const { handleChange } = useForm(form, setForm);
+  const state = useSelector((s) => s?.formReducer);
+  const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    const { isAdminAuth } = state;
-    if (isAdminAuth) navigate("/form");
-  }, []);
+  // handle show password text
+  const handleShowPassword = () =>
+    isMounted ? setShowPassword(!showPassword) : null;
 
+  // handle submit form
   const handleSubmit = async (ev) => {
     try {
       ev.preventDefault();
-      const { username, password } = state;
-      if (!username || !password) return;
-      const { data } = await axios.post(
-        BACK_URL + "/login",
-        {
-          email: username,
-          password,
-        },
-        {
-          headers,
-        }
-      );
-      const { error, isAuth } = data;
-      if (error) {
-        setState({
-          ...state,
-          username: "",
-          password: "",
-        });
-      } else {
-        setState({
-          ...state,
-          isAdminAuth: true,
-        });
-        navigate("/form");
-      }
+      const { username, password } = form;
+      if (username === "" || password === "") return;
+      const data = {
+        username,
+        password,
+      };
+      const { data: resp } = await axios.post(`${BACK_URL}/login`, data);
+      const { err, message, isAuth } = resp;
+      if (err) return console.log(message);
+      dispatch(setIsAuth(isAuth));
+      navigate("/form");
     } catch (err) {
       console.log(err);
+    } finally {
+      setForm({
+        username: "",
+        password: "",
+      });
     }
   };
 
-  const handleShowPassword = () =>
-    setState((state) => {
-      const { showPassword } = state;
-      return {
-        ...state,
-        showPassword: !showPassword,
-      };
-    });
-
   return (
     <Page
-      handleSubmit={handleSubmit}
+      form={form}
       state={state}
-      isCompleted={isCompleted}
-      handleShowPassword={handleShowPassword}
+      showPassword={showPassword}
+      handleSubmit={handleSubmit}
       handleChange={handleChange}
+      handleShowPassword={handleShowPassword}
     />
   );
 };

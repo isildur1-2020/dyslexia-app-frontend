@@ -80,32 +80,51 @@ app.post("/upload", upload.single("record"), (req, res) => {
 
 app.post("/login", (req, res) => {
   try {
-    const { email, password } = req.body;
-    const isEmailExist = users.find((user) => user.email === email);
-    if (!isEmailExist)
+    const { username, password } = req.body;
+    // Searching email on database
+    const isUsernameExists = users.find((user) => user.username === username);
+    if (!isUsernameExists) {
+      const message = "Email not found :c";
+      console.log(message);
       return res.status(200).json({
+        message,
+        err: true,
+        token: null,
         isAuth: false,
-        error: "Email inexistente",
       });
+    }
+    // Searching the password on database
     const isPasswordCorrect = users.find((user) => user.password === password);
-    if (!isPasswordCorrect)
+    if (!isPasswordCorrect) {
+      const message = "Invalid password :c";
+      console.log(message);
       return res.status(200).json({
+        message,
+        err: true,
+        token: null,
         isAuth: false,
-        error: "Contraseña incorrecta",
       });
+    }
+    // Authentication succesfully
+    const message = "Authenticated c:";
+    console.log(message, username);
     res.status(200).json({
+      message,
+      err: false,
+      token: null,
       isAuth: true,
-      error: false,
     });
   } catch (err) {
     console.log(err);
     res.status(200).json({
+      err: true,
+      token: null,
       isAuth: false,
-      error: true,
+      message: err?.message,
     });
   }
 });
 
 app.listen(app.get("PORT"), () => {
-  console.log("Listening on localhost:", app.get("PORT"));
+  console.log("Listening on port: ", app.get("PORT"));
 });

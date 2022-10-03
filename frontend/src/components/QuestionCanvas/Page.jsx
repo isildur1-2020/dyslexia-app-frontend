@@ -13,7 +13,7 @@ export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
       <Typography
         align="center"
         variant="h4"
-        component="p"
+        component="h4"
         sx={{ fontWeight: 600 }}
       >
         <Box>
@@ -24,7 +24,7 @@ export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
         {title}:
       </Typography>
       <Box mt={2}>
-        <Typography align="center" variant="h4" component="p">
+        <Typography align="center" variant="h4" component="h4">
           {subtitle}
         </Typography>
       </Box>

@@ -3,9 +3,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { MainContext } from "../../contexts/MainContext";
 import { headers } from "../../utils/headers";
-import { BACK_URL } from "../../config";
 import logo from "../../assets/logo.png";
 import styles from "./styles.module.scss";
+
+const BACK_URL = "https://api.dyslexia-test.online";
 
 export const SendData = ({
   stopRecordingVideo,

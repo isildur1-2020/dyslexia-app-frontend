@@ -1,28 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Layout } from "../../components/Layout/Layout";
 import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
+import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
-import Input from "@mui/material/Input";
-import { Divider, InputLabel, Typography } from "@mui/material";
-import Radio from "@mui/material/Radio";
+import Divider from "@mui/material/Divider";
+import InputLabel from "@mui/material/InputLabel";
+import Typography from "@mui/material/Typography";
 import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import { Layout } from "../../components/Layout/Layout";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
-  const {
-    name,
-    age,
-    dateOfBirth,
-    nationality,
-    bloodType,
-    gender,
-    currentLanguaje,
-  } = state;
+export const Page = ({
+  mainState,
+  formState,
+  isCompleted,
+  handleSubmit,
+  handleChange,
+}) => {
+  const { currentLanguaje } = mainState;
+  const { name, age, dateOfBirth, nationality, bloodType, gender } = formState;
   return (
-    <Layout title="">
+    <Layout>
       <Box mt={6}>
         <div className={styles.Form}>
           <form onSubmit={handleSubmit}>
@@ -39,9 +40,9 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
                 </InputLabel>
                 <Input
                   fullWidth
-                  id="user-name"
                   name="name"
                   value={name}
+                  id="user-name"
                   onChange={handleChange}
                 />
               </Box>
@@ -51,10 +52,10 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
                 </InputLabel>
                 <Input
                   fullWidth
-                  id="user-age"
                   name="age"
-                  type="number"
                   value={age}
+                  id="user-age"
+                  type="number"
                   onChange={handleChange}
                 />
               </Box>
@@ -77,8 +78,8 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
                 </InputLabel>
                 <Input
                   fullWidth
-                  id="user-nationality"
                   name="nationality"
+                  id="user-nationality"
                   value={nationality}
                   onChange={handleChange}
                 />
@@ -89,9 +90,9 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
                 </InputLabel>
                 <Input
                   fullWidth
-                  id="user-bloodType"
                   name="bloodType"
                   value={bloodType}
+                  id="user-bloodType"
                   onChange={handleChange}
                 />
               </Box>
@@ -117,11 +118,11 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
 
               <Box mt={4} mb={8}>
                 <Button
-                  disabled={!isCompleted}
-                  type="submit"
                   fullWidth
-                  variant="contained"
                   size="large"
+                  type="submit"
+                  variant="contained"
+                  disabled={!isCompleted}
                 >
                   {currentLanguaje?.submit}
                 </Button>
@@ -135,8 +136,18 @@ export const Page = ({ state, handleSubmit, handleChange, isCompleted }) => {
 };
 
 Page.propTypes = {
-  state: PropTypes.object,
-  handleSubmit: PropTypes.func,
-  handleChange: PropTypes.func,
-  isCompleted: PropTypes.bool,
+  handleSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  isCompleted: PropTypes.bool.isRequired,
+  mainState: PropTypes.shape({
+    currentLanguaje: PropTypes.object,
+  }).isRequired,
+  formState: PropTypes.shape({
+    name: PropTypes.string,
+    age: PropTypes.string,
+    gender: PropTypes.string,
+    bloodType: PropTypes.string,
+    dateOfBirth: PropTypes.string,
+    nationality: PropTypes.string,
+  }).isRequired,
 };

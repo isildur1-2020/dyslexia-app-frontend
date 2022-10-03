@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -9,66 +9,106 @@ import KeyboardTabIcon from "@mui/icons-material/KeyboardTab";
 import styles from "./styles.module.scss";
 import { Typography } from "@mui/material";
 
-export const Page = ({ state, languajes, handleClick, handleChange }) => (
-  <Layout title="">
-    <div className={styles.ChooseLang}>
-      <Box mb={3}>
-        <Typography variant="h5" component="span">
-          Choose your languaje
-        </Typography>
-      </Box>
-      <div className={styles.ChooseLang__container}>
-        <TextField
-          select
-          id="languaje"
-          name="languaje"
-          value={state.languaje}
-          onChange={handleChange}
-          fullWidth
-        >
-          <MenuItem value={0}>Select...</MenuItem>
-          {languajes.length > 0 &&
-            languajes.map((lang) => (
-              <MenuItem key={lang} value={lang}>
-                {lang}
-              </MenuItem>
-            ))}
-        </TextField>
-        <Box ml={1}>
-          <Button
-            disabled={!state.languaje}
-            variant="outlined"
-            onClick={handleClick}
-            sx={{ height: 56 }}
-          >
-            <KeyboardTabIcon />
-          </Button>
+const containerStyle = {
+  width: 300,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+};
+
+export const Page = ({
+  state,
+  languajes,
+  timeOptions,
+  handleClick,
+  handleTimeChange,
+  handleLanguajeChange,
+}) => {
+  const { languaje, timePerQuestion } = state;
+  return (
+    <Layout>
+      <Box className={styles.ChooseLang}>
+        <Box mb={2}>
+          <Typography variant="h5" component="span">
+            Choose your languaje
+          </Typography>
         </Box>
-      </div>
-      <Box mt={4}>
-        <Typography align="center" variant="h6" component="p">
-          Time per question (seconds)
-        </Typography>
-        <TextField
-          type="number"
-          id="secondsPerQuestion"
-          name="secondsPerQuestion"
-          placeholder="default - 240 seconds"
-          value={state.secondsPerQuestion}
-          onChange={handleChange}
-          sx={{ width: 300 }}
-        />
+        <Box style={containerStyle}>
+          <Select
+            fullWidth
+            displayEmpty
+            id="languaje"
+            name="languaje"
+            value={languaje}
+            onChange={handleLanguajeChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {languajes.length > 0 &&
+              languajes.map((lang) => (
+                <MenuItem key={lang} value={lang}>
+                  {lang.toLocaleUpperCase()}
+                </MenuItem>
+              ))}
+          </Select>
+          <Box ml={1}>
+            <Button
+              disabled={languaje === "" || timePerQuestion === ""}
+              variant="outlined"
+              onClick={handleClick}
+              sx={{ height: 56 }}
+            >
+              <KeyboardTabIcon />
+            </Button>
+          </Box>
+        </Box>
+        <Box>
+          <Box mt={4} mb={2} display="flex" justifyContent="center">
+            <Typography variant="h5" component="span">
+              Minutes per question
+            </Typography>
+          </Box>
+          <Select
+            displayEmpty
+            sx={{ width: 300 }}
+            id="minutesPerQuestion"
+            name="minutesPerQuestion"
+            onChange={handleTimeChange}
+            value={timePerQuestion}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {timeOptions.length > 0 &&
+              timeOptions.map(({ label, time }) => (
+                <MenuItem key={time} value={time}>
+                  {label}
+                </MenuItem>
+              ))}
+          </Select>
+        </Box>
       </Box>
-    </div>
-  </Layout>
-);
+    </Layout>
+  );
+};
 
 Page.propTypes = {
-  languajes: PropTypes.arrayOf(PropTypes.string),
-  state: PropTypes.shape({
-    languaje: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  }),
-  handleChange: PropTypes.func,
-  navigate: PropTypes.func,
   handleClick: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleTimeChange: PropTypes.func,
+  handleLanguajeChange: PropTypes.func,
+  languajes: PropTypes.arrayOf(PropTypes.string),
+
+  state: PropTypes.shape({
+    languaje: PropTypes.string,
+    timePerQuestion: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }).isRequired,
+
+  timeOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      time: PropTypes.number,
+    })
+  ).isRequired,
 };

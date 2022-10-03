@@ -14,15 +14,17 @@ import PersonIcon from "@mui/icons-material/Person";
 import { InputLabel, Typography } from "@mui/material";
 
 export const Page = ({
-  handleSubmit,
+  form,
   state,
-  handleShowPassword,
   handleChange,
-  isCompleted,
+  handleSubmit,
+  showPassword,
+  handleShowPassword,
 }) => {
-  const { username, password, showPassword, currentLanguaje } = state;
+  const { currentLanguaje } = state;
+  const { username, password } = form;
   return (
-    <Layout title="">
+    <Layout>
       <div className={styles.Login}>
         <form onSubmit={handleSubmit}>
           <div className={styles.Login__container}>
@@ -48,8 +50,8 @@ export const Page = ({
               </InputLabel>
               <Input
                 fullWidth
-                id="user-username"
                 name="username"
+                id="user-username"
                 value={username}
                 onChange={handleChange}
               />
@@ -60,21 +62,21 @@ export const Page = ({
               </InputLabel>
               <Input
                 fullWidth
-                id="user-password"
                 name="password"
-                type={showPassword ? "text" : "password"}
+                id="user-password"
                 value={password}
                 onChange={handleChange}
+                type={showPassword ? "text" : "password"}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="toggle password visibility"
                       onClick={handleShowPassword}
                     >
-                      {showPassword ? (
+                      {!showPassword ? (
                         <VisibilityIcon />
                       ) : (
-                        <VisibilityOffIcon />
+                        <VisibilityOffIcon color="error" />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -83,11 +85,11 @@ export const Page = ({
             </Box>
             <Box mt={6}>
               <Button
-                disabled={!isCompleted}
-                type="submit"
                 fullWidth
-                variant="contained"
                 size="large"
+                type="submit"
+                variant="outlined"
+                disabled={username === "" || password === ""}
               >
                 {currentLanguaje.submit}
               </Button>
@@ -100,9 +102,15 @@ export const Page = ({
 };
 
 Page.propTypes = {
-  handleSubmit: PropTypes.func,
-  state: PropTypes.object,
-  handleShowPassword: PropTypes.func,
+  form: PropTypes.shape({
+    username: PropTypes.string,
+    password: PropTypes.string,
+  }).isRequired,
+  state: PropTypes.shape({
+    currentLanguaje: PropTypes.object,
+  }),
   handleChange: PropTypes.func,
-  isCompleted: PropTypes.bool,
+  handleSubmit: PropTypes.func,
+  showPassword: PropTypes.bool,
+  handleShowPassword: PropTypes.func,
 };

@@ -1,47 +1,50 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { MainContext } from "../../contexts/MainContext";
 import { useIsMounted } from "../../hooks/useIsMounted";
-import { useForm } from "../../hooks/useForm";
 import { languajes } from "../../languajes/languajes";
-import { langsToUpper } from "../../adapters/languajes";
+import { timeOptions } from "./data";
 import { Page } from "./Page";
+import {
+  setLanguaje,
+  setTimePerQuestion,
+  setCurrentLanguaje,
+} from "../../redux/actions/main";
 
 export const ChooseLang = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isMounted } = useIsMounted();
   const [langs, setLangs] = useState([]);
-  const { state, setState } = useContext(MainContext);
-  const { handleChange } = useForm(state, setState);
-
-  const adapterLangs = useCallback(() => {
-    const newLangs = langsToUpper(languajes);
-    if (isMounted) setLangs(newLangs);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const state = useSelector((s) => s?.formReducer);
 
   const handleClick = () => {
-    const { languaje } = state;
-    if (languaje === 0 || languaje === "") return;
-    const langKey = languaje.toLowerCase();
-    setState({
-      ...state,
-      currentLanguaje: languajes[langKey],
-    });
+    const { languaje, timePerQuestion } = state;
+    if (languaje === "" || timePerQuestion === "") return;
+    dispatch(setCurrentLanguaje(languajes?.[languaje]));
     navigate("/login");
   };
 
+  // redux actions
+  const handleLanguajeChange = ({ target }) =>
+    dispatch(setLanguaje(target.value));
+  const handleTimeChange = ({ target }) =>
+    dispatch(setTimePerQuestion(target?.value));
+
+  // To set lang options
   useEffect(() => {
-    adapterLangs();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const langOptions = Object.keys(languajes);
+    if (isMounted) setLangs(langOptions);
+  }, []);
 
   return (
     <Page
       state={state}
       languajes={langs}
-      setState={setState}
-      navigate={navigate}
       handleClick={handleClick}
-      handleChange={handleChange}
+      timeOptions={timeOptions}
+      handleTimeChange={handleTimeChange}
+      handleLanguajeChange={handleLanguajeChange}
     />
   );
 };
