@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Canvas } from "../components/Canvas/Canvas";
+import { RecordModal } from "../components/RecordModal";
+import { setShowRecordModal, setHideRecordModal } from "../redux/actions/main";
 import { QuestionCanvas } from "../components/QuestionCanvas/QuestionCanvas";
 
 export const FirstPage = ({
@@ -9,21 +11,30 @@ export const FirstPage = ({
   startRecordingVideo,
   startRecordingScreen,
 }) => {
-  const mainState = useSelector((s) => s?.mainState);
-  const { currentLanguaje } = mainState;
+  const dispatch = useDispatch();
+  const { currentLanguaje } = useSelector((s) => s?.mainState);
   const { title1, subtitle1 } = currentLanguaje;
 
-  // useEffect(() => {
-  //   if (statusVideo !== "recording") startRecordingVideo();
-  //   if (statusScreen !== "recording") startRecordingScreen();
-  // }, []);
+  const handleStart = () => {
+    if (statusVideo !== "recording") startRecordingVideo();
+    if (statusScreen !== "recording") startRecordingScreen();
+    dispatch(setHideRecordModal());
+  };
+
+  useEffect(() => {
+    if (statusVideo !== "recording" && statusScreen !== "recording")
+      dispatch(setShowRecordModal());
+  }, []);
 
   return (
-    <QuestionCanvas
-      clockID={1}
-      title={title1}
-      Canvas={Canvas}
-      subtitle={subtitle1}
-    />
+    <>
+      <RecordModal handleStart={handleStart} />
+      <QuestionCanvas
+        clockID={1}
+        title={title1}
+        Canvas={Canvas}
+        subtitle={subtitle1}
+      />
+    </>
   );
 };

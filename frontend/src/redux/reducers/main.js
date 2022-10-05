@@ -7,6 +7,7 @@ const initialState = {
   isAuth: false,
   questions: [1, 2, 3, 4, 5, 6, 7],
   currentQuestion: 1,
+  showRecordModal: false,
 };
 
 export const formReducer = (state = initialState, action) => {
@@ -47,6 +48,16 @@ export const formReducer = (state = initialState, action) => {
       return {
         ...state,
         questions: newQuestions,
+      };
+    case types.SET_SHOW_RECORD_MODAL:
+      return {
+        ...state,
+        showRecordModal: true,
+      };
+    case types.SET_HIDE_RECORD_MODAL:
+      return {
+        ...state,
+        showRecordModal: false,
       };
     default:
       return state;

@@ -41,7 +41,7 @@ export const Page = ({
           </IconButton>
           {title}
         </Typography>
-        <Box className={styles.QuestionList__list} mt={2}>
+        <Box className={styles.QuestionList__list}>
           <ul style={rectStyle}>
             {list?.map((item) => (
               <div key={item}>

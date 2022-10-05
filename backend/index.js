@@ -3,6 +3,7 @@ const path = require("path");
 const multer = require("multer");
 const morgan = require("morgan");
 const cors = require("cors");
+const moment = require("moment");
 const express = require("express");
 const nodemailer = require("nodemailer");
 const { users } = require("./src/database/users");
@@ -31,7 +32,7 @@ var upload = multer({ storage });
 app.post("/data", (req, res) => {
   const { userData, videoLink, screenLink } = req.body;
   const { age, bloodType, dateOfBirth, gender, name, nationality } = userData;
-  console.log(userData, videoLink, screenLink);
+
   var transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -45,14 +46,14 @@ app.post("/data", (req, res) => {
     to: process.env.EMAIL_DESTINY,
     subject: "Dyslexia App",
     text: `
-      LINK CAMERA RECORD ${videoLink}
-      LINK SCREEN RECORD ${screenLink}
-      NAME: ${name}
-      AGE: ${age}
-      GENDER: ${gender}
-      DATE OF BIRTH: ${dateOfBirth}
-      BLOOD TYPE: ${bloodType}
-      NATIONALITY: ${nationality}
+    AGE: ${age}
+    NAME: ${name}
+    GENDER: ${gender}
+    BLOOD TYPE: ${bloodType}
+    NATIONALITY: ${nationality}
+    DATE OF BIRTH: ${dateOfBirth}
+    LINK CAMERA RECORD ${videoLink}
+    LINK SCREEN RECORD ${screenLink}
     `,
   };
 
@@ -68,14 +69,27 @@ app.post("/data", (req, res) => {
 });
 
 app.post("/upload", upload.single("record"), (req, res) => {
-  const { mimetype, path, filename } = req.file;
-  console.log(req.file);
-  const type = mimetype.split("/")[1];
-  const newPath = `${path}.${type}`;
-  fs.renameSync(path, newPath);
-  res.status(200).json({
-    URL: `/${filename}.${type}`,
-  });
+  try {
+    const { mimetype, path } = req.file;
+    const extension = mimetype.split("/")?.[1];
+    const filename = moment().format();
+    let currentPath = path?.split("/");
+    currentPath.pop();
+    currentPath.push(filename);
+    currentPath = currentPath.join("/");
+    const newPath = `${currentPath}.${extension}`;
+    fs.renameSync(path, newPath);
+    res.status(200).json({
+      err: null,
+      URL: `/${filename}.${extension}`,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      err,
+      URL: null,
+    });
+  }
 });
 
 app.post("/login", (req, res) => {

@@ -29,7 +29,7 @@ export const Page = ({
         </IconButton>
       </>
     ) : (
-      <Box>
+      <Box mt={1}>
         <Button onClick={handleFinish} variant="outlined" size="large">
           {finishText}
         </Button>

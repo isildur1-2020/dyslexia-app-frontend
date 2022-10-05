@@ -1,11 +1,17 @@
-import axios from "axios";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { headers } from "../../utils/headers";
-import logo from "../../assets/logo.png";
-import styles from "./styles.module.scss";
-
-const BACK_URL = "https://api.dyslexia-test.online";
+import { BACK_URL } from "../../axios/axiosInstance";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setEmailSended,
+  clearRecordInfo,
+  setScreenRecordLink,
+  setCameraRecordLink,
+  setScreenRecordSended,
+  setCameraRecordSended,
+} from "../../redux/actions/sendData";
+import { sendData, sendEmailData } from "../../services/sendDataService";
+import { Page } from "./Page";
 
 export const SendData = ({
   stopRecordingVideo,
@@ -13,107 +19,59 @@ export const SendData = ({
   mediaBlobUrlVideo,
   mediaBlobUrlScreen,
 }) => {
-  // const navigate = useNavigate();
-  // const { state, setState } = useContext(MainContext);
-  // const [linkVideoRecord, setLinkVideoRecord] = useState("");
-  // const [linkScreenRecord, setLinkScreenRecord] = useState("");
-  // const [isLinkVideoSend, setIsLinkVideoSend] = useState(false);
-  // const [isEmailSend, setIsEmailSend] = useState(false);
-  // const [isLinkScreenSend, setIsLinkScreenSend] = useState(false);
-  // const { age, bloodType, dateOfBirth, gender, name, nationality } = state;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const formState = useSelector((s) => s?.userForm);
+  const sendDataState = useSelector((s) => s?.sendDataState);
+  const { isCameraRecordSend, isScreenRecordSend, isEmailSend } = sendDataState;
 
-  // const sendFullData = async (data) => {
-  //   if (!name) return;
-  //   await axios.post(BACK_URL + "/data", data, {
-  //     headers,
-  //   });
-  // };
+  useEffect(() => {
+    if (!isEmailSend) return;
+    dispatch(clearRecordInfo());
+    navigate("/");
+  }, [isEmailSend]);
 
-  // useEffect(() => {
-  //   if (!isLinkVideoSend || !isLinkScreenSend) return;
-  //   sendFullData({
-  //     videoLink: BACK_URL + linkVideoRecord,
-  //     screenLink: BACK_URL + linkScreenRecord,
-  //     userData: { age, bloodType, dateOfBirth, gender, name, nationality },
-  //   });
-  //   setIsEmailSend(true);
-  // }, [isLinkVideoSend, isLinkScreenSend]);
+  // SEND EMAIL
+  useEffect(() => {
+    if (!isCameraRecordSend || !isScreenRecordSend) return;
+    const { cameraRecordLink, screenRecordLink } = sendDataState;
+    sendEmailData({
+      userData: formState,
+      videoLink: cameraRecordLink,
+      screenLink: screenRecordLink,
+    });
+    dispatch(setEmailSended());
+  }, [isCameraRecordSend, isScreenRecordSend]);
 
-  // const convertURLToBlob = async (URL) => {
-  //   try {
-  //     const data = await fetch(URL);
-  //     const blob = await data.blob();
-  //     return blob;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  // SEND CAMERA RECORD
+  useEffect(() => {
+    if (!mediaBlobUrlVideo) return;
+    if (isCameraRecordSend) return;
+    const sendRecord = async () => {
+      const { data } = await sendData(mediaBlobUrlVideo);
+      dispatch(setCameraRecordSended());
+      dispatch(setCameraRecordLink(BACK_URL + data?.URL));
+    };
+    sendRecord();
+  }, [mediaBlobUrlVideo]);
 
-  // const sendData = async (data) => {
-  //   return await axios.post(BACK_URL + "/upload", data, {
-  //     headers: {
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   });
-  // };
+  // SEND SCREEN RECORD
+  useEffect(() => {
+    if (!mediaBlobUrlScreen) return;
+    if (isScreenRecordSend) return;
+    const sendRecord = async () => {
+      const { data } = await sendData(mediaBlobUrlScreen);
+      dispatch(setScreenRecordSended());
+      dispatch(setScreenRecordLink(BACK_URL + data?.URL));
+    };
+    sendRecord();
+  }, [mediaBlobUrlScreen]);
 
-  // useEffect(() => {
-  //   if (!isEmailSend) return;
-  //   setState({
-  //     ...state,
-  //     isUserAuth: false,
-  //     name: "",
-  //     age: "",
-  //     dateOfBirth: "",
-  //     nationality: "",
-  //     bloodType: "",
-  //     gender: null,
-  //   });
-  //   navigate("/form");
-  // }, [isEmailSend]);
+  // STOP RECORDING
+  useEffect(() => {
+    stopRecordingVideo();
+    stopRecordingScreen();
+  }, []);
 
-  // useEffect(() => {
-  //   if (isLinkVideoSend) return;
-  //   if (!mediaBlobUrlVideo) return;
-
-  //   async function sendRecord() {
-  //     try {
-  //       const videoBlob = await convertURLToBlob(mediaBlobUrlVideo);
-  //       const formData = new FormData();
-  //       formData.append("record", videoBlob);
-  //       const { data } = await sendData(formData);
-  //       setLinkVideoRecord(data.URL);
-  //       setIsLinkVideoSend(true);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   sendRecord();
-  // }, [mediaBlobUrlVideo]);
-
-  // useEffect(() => {
-  //   if (isLinkScreenSend) return;
-  //   if (!mediaBlobUrlScreen) return;
-
-  //   async function sendRecord() {
-  //     const screenBlob = await convertURLToBlob(mediaBlobUrlScreen);
-  //     const formData = new FormData();
-  //     formData.append("record", screenBlob);
-  //     const { data } = await sendData(formData);
-  //     setLinkScreenRecord(data.URL);
-  //     setIsLinkScreenSend(true);
-  //   }
-  //   sendRecord();
-  // }, [mediaBlobUrlScreen]);
-
-  // useEffect(() => {
-  //   stopRecordingVideo();
-  //   stopRecordingScreen();
-  // }, []);
-
-  return (
-    <div className={styles.SendData}>
-      <img src={logo} alt="dyslexia-app" title="dyslexia-app" />
-    </div>
-  );
+  return <Page />;
 };

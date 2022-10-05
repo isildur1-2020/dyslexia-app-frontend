@@ -28,13 +28,13 @@ export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
           </IconButton>
           {title}
         </Typography>
-        <Box mt={1}>
+        <Box>
           <Typography align="center" variant="h4" component="h4">
             {subtitle}
           </Typography>
         </Box>
       </Box>
-      <Box mt={4}>
+      <Box mt={2}>
         <Canvas />
       </Box>
     </Box>

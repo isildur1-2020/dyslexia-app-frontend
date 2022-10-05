@@ -34,3 +34,11 @@ export const setRemoveQuestion = (question) => ({
   type: types.SET_REMOVE_QUESTION,
   question,
 });
+
+export const setShowRecordModal = () => ({
+  type: types.SET_SHOW_RECORD_MODAL,
+});
+
+export const setHideRecordModal = () => ({
+  type: types.SET_HIDE_RECORD_MODAL,
+});
