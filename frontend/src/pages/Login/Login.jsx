@@ -29,7 +29,9 @@ export const Login = () => {
     try {
       ev.preventDefault();
       const { username, password } = form;
-      if (username === "" || password === "") return;
+      // if (username === "" || password === "") return;
+      // change this
+      navigate("/form");
       const data = {
         username,
         password,

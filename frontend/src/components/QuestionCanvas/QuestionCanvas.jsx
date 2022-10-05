@@ -1,16 +1,9 @@
+import React from "react";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
-import { MainContext } from "../../contexts/MainContext";
-import { useSetCurrentPage } from "../../hooks/useSetCurrentPage";
-import { speech } from "../../utils/speech";
 import { Page } from "./Page";
 
 export const QuestionCanvas = (props) => {
-  const { state, setState } = useContext(MainContext);
-  useSetCurrentPage(state, setState);
-
-  const handleClick = () => speech(props.title);
-
+  const handleClick = () => {};
   return <Page {...props} handleClick={handleClick} />;
 };
 
@@ -19,4 +12,5 @@ QuestionCanvas.propTypes = {
   subtitle: PropTypes.string,
   Canvas: PropTypes.elementType,
   clockID: PropTypes.number,
+  handleClick: PropTypes.func,
 };

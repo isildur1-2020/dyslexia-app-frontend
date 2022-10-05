@@ -107,7 +107,7 @@ app.post("/login", (req, res) => {
     }
     // Authentication succesfully
     const message = "Authenticated c:";
-    console.log(message, username);
+    console.log(`User: ${username} -> ${message}`);
     res.status(200).json({
       message,
       err: false,

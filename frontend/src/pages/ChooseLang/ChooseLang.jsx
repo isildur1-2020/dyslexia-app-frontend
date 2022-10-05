@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useIsMounted } from "../../hooks/useIsMounted";
 import { languajes } from "../../languajes/languajes";
-import { timeOptions } from "./data";
-import { Page } from "./Page";
+import { setTotalSeconds } from "../../redux/actions/clocks";
 import {
   setLanguaje,
-  setTimePerQuestion,
   setCurrentLanguaje,
+  setTimePerQuestion,
 } from "../../redux/actions/main";
+import { timeOptions } from "./data";
+import { Page } from "./Page";
 
 export const ChooseLang = () => {
   const navigate = useNavigate();
@@ -28,8 +29,12 @@ export const ChooseLang = () => {
   // redux actions
   const handleLanguajeChange = ({ target }) =>
     dispatch(setLanguaje(target.value));
-  const handleTimeChange = ({ target }) =>
-    dispatch(setTimePerQuestion(target?.value));
+
+  const handleTimeChange = (ev) => {
+    const seconds = ev?.target?.value;
+    dispatch(setTotalSeconds(seconds));
+    dispatch(setTimePerQuestion(seconds));
+  };
 
   // To set lang options
   useEffect(() => {

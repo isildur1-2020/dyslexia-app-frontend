@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -19,7 +20,7 @@ export const Page = ({
 }) => {
   const rectStyle = {
     border: `4px solid ${borderColor}`,
-    backgroundColor: backgroundColor ? backgroundColor : "#fff",
+    backgroundColor: backgroundColor ?? "#fff",
   };
   return (
     <Box className={styles.QuestionList}>
@@ -28,7 +29,7 @@ export const Page = ({
         <Typography
           align="center"
           variant="h4"
-          component="p"
+          component="h4"
           sx={{ fontWeight: 600 }}
         >
           <Box>
@@ -55,4 +56,15 @@ export const Page = ({
       </Box>
     </Box>
   );
+};
+
+Page.propTypes = {
+  title: PropTypes.string,
+  clockID: PropTypes.number,
+  fontSize: PropTypes.string,
+  textStyle: PropTypes.object,
+  handleClick: PropTypes.func,
+  borderColor: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  list: PropTypes.arrayOf(PropTypes.string),
 };

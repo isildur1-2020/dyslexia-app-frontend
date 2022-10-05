@@ -19,3 +19,18 @@ export const setIsAuth = (isAuth) => ({
   type: types.SET_IS_AUTH,
   isAuth,
 });
+
+export const setQuestionList = (questions) => ({
+  type: types.SET_QUESTION_LIST,
+  questions,
+});
+
+export const setCurrentQuestion = (question) => ({
+  type: types.SET_CURRENT_QUESTION,
+  question,
+});
+
+export const setRemoveQuestion = (question) => ({
+  type: types.SET_REMOVE_QUESTION,
+  question,
+});

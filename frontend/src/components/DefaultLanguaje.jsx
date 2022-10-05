@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import { useEffect, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentLanguaje } from "../redux/actions/main";
 import { languajes } from "../languajes/languajes";
@@ -13,5 +13,5 @@ export const DefaultLanguaje = memo(({ children }) => {
       dispatch(setCurrentLanguaje(lang));
     }
   }, []);
-  return <>{children}</>;
+  return children;
 });

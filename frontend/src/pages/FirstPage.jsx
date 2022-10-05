@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from "react";
-import { MainContext } from "../contexts/MainContext";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Canvas } from "../components/Canvas/Canvas";
 import { QuestionCanvas } from "../components/QuestionCanvas/QuestionCanvas";
 
@@ -9,14 +9,14 @@ export const FirstPage = ({
   startRecordingVideo,
   startRecordingScreen,
 }) => {
-  const { state } = useContext(MainContext);
-  const { currentLanguaje } = state;
+  const mainState = useSelector((s) => s?.formReducer);
+  const { currentLanguaje } = mainState;
   const { title1, subtitle1 } = currentLanguaje;
 
-  useEffect(() => {
-    if (statusVideo !== "recording") startRecordingVideo();
-    if (statusScreen !== "recording") startRecordingScreen();
-  }, []);
+  // useEffect(() => {
+  //   if (statusVideo !== "recording") startRecordingVideo();
+  //   if (statusScreen !== "recording") startRecordingScreen();
+  // }, []);
 
   return (
     <QuestionCanvas

@@ -1,16 +1,16 @@
-import { useState, useEffect, useContext } from "react";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { MainContext } from "../contexts/MainContext";
 
 export const usePages = () => {
   const location = useLocation();
+  const currentPage = Number(location?.pathname?.[1]);
   const [isPrevPage, setIsPrevPage] = useState(false);
   const [isNextPage, setIsNextPage] = useState(false);
-  const { state } = useContext(MainContext);
-  const { questions } = state;
+  const mainState = useSelector((s) => s?.formReducer);
+  const { questions } = mainState;
 
   useEffect(() => {
-    const currentPage = Number(location.pathname[1]);
     const prevPage = currentPage - 1;
     const nextPage = currentPage + 1;
     const isExistPrevPage = questions.indexOf(prevPage);
@@ -22,5 +22,6 @@ export const usePages = () => {
   return {
     isPrevPage,
     isNextPage,
+    currentPage,
   };
 };

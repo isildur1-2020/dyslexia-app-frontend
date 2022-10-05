@@ -1,78 +1,57 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useRef, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { usePages } from "../../hooks/usePages";
-import { MainContext } from "../../contexts/MainContext";
-import { ClocksContext } from "../../contexts/ClocksContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setRemoveQuestion } from "../../redux/actions/main";
 import { getMinutes, getSeconds } from "../../utils/clock";
+import {
+  setIntervalId,
+  setTotalSeconds,
+  reduceClockSeconds,
+} from "../../redux/actions/clocks";
 import { Page } from "./Page";
 
 export const Clock = ({ clockID }) => {
-  let intervalID = useRef();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { isPrevPage, isNextPage } = usePages();
-  const { clocks, setClocks } = useContext(ClocksContext);
-  const { state, setState } = useContext(MainContext);
-  // CLOCK INFO
-  const clockName = `clock${clockID}`;
-  const currentClock = clocks[clockName];
-  const { isActive, seconds } = currentClock;
-  const { questions } = state;
+  const dispatch = useDispatch();
+  const { isNextPage, currentPage } = usePages();
+  const clockState = useSelector((s) => s?.clocks);
+  const mainState = useSelector((s) => s?.formReducer);
+  const { seconds, intervalId } = clockState;
+  const { questions, timePerQuestion } = mainState;
 
-  const setIsActive = (isActive) => {
-    setClocks((prevState) => {
-      const currentClock = prevState[clockName];
-      return {
-        ...prevState,
-        [clockName]: {
-          ...currentClock,
-          isActive,
-        },
-      };
-    });
-  };
-
-  const setSeconds = () => {
-    setClocks((prevState) => {
-      const currentClock = prevState[clockName];
-      const { seconds } = currentClock;
-      return {
-        ...prevState,
-        [clockName]: {
-          ...currentClock,
-          seconds: seconds - 1,
-        },
-      };
-    });
-  };
-
-  const changePage = () => {
-    const page = Number(pathname[1]);
-    const prevPage = page - 1;
-    const nextPage = page + 1;
-    if (isNextPage) return navigate(`/${nextPage}`);
-    if (isPrevPage) return navigate(`/${prevPage}`);
-    navigate("/sendData");
-  };
+  // useEffect(() => {
+  //   const isAllowed = questions.some((q) => q === currentPage);
+  //   console.log(isAllowed, isNextPage);
+  //   console.log(questions);
+  //   if (!isAllowed && isNextPage) navigate(`/${questions[0]}`);
+  // }, []);
 
   useEffect(() => {
-    if (seconds <= 0) {
-      clearInterval(intervalID.current);
-      const newQuestions = questions.filter((question) => question !== clockID);
-      setState({
-        ...state,
-        questions: newQuestions,
-      });
-      changePage();
+    if (isNextPage) navigate(`/${questions[0]}`);
+  }, [questions]);
+
+  useEffect(() => {
+    if (seconds == 0) {
+      clearInterval(intervalId);
+      dispatch(setRemoveQuestion(clockID));
     }
   }, [seconds]);
 
+  const setSeconds = () => dispatch(reduceClockSeconds());
+
+  // ACTIVE CLOCK
   useEffect(() => {
-    if (!isActive && !intervalID.current) {
-      setIsActive(true);
-      intervalID.current = setInterval(setSeconds, 1000);
+    if (intervalId === null) {
+      let id = setInterval(setSeconds, 1000);
+      dispatch(setIntervalId(id));
     }
+  }, [timePerQuestion]);
+
+  // ALWAYS SET TOTAL SECONDS
+  useEffect(() => {
+    dispatch(setTotalSeconds(timePerQuestion));
   }, []);
 
   return <Page minutes={getMinutes(seconds)} seconds={getSeconds(seconds)} />;

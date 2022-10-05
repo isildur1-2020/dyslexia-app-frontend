@@ -18,6 +18,7 @@ import { FifthPage } from "./pages/FifthPage";
 import { SixthPage } from "./pages/SixthPage";
 import { SeventhPage } from "./pages/SeventhPage";
 import { SendData } from "./pages/SendData/SendData";
+import { NotFound } from "./pages/NotFound";
 import { PrivateRoute } from "./Routers/PrivateRoute";
 import { OnlyAdminRoute } from "./Routers/OnlyAdminRoute";
 import { appState } from "./states/appState";
@@ -84,7 +85,7 @@ const App = () => {
                     />
                   }
                 />
-                {/* <Route path="*" element={<h1>Not found - 404</h1>} /> */}
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
           </ClocksContext.Provider>

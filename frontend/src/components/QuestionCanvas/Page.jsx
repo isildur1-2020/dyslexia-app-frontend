@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import { Clock } from "../../components/Clock/Clock";
 import { Buttons } from "../../components/Buttons/Buttons";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 
 export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
   <>
@@ -37,3 +38,11 @@ export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
     </Box>
   </>
 );
+
+Page.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  Canvas: PropTypes.elementType.isRequired,
+  clockID: PropTypes.number.isRequired,
+  handleClick: PropTypes.func,
+};

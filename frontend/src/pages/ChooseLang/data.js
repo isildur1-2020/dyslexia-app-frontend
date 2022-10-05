@@ -1,22 +1,22 @@
 export const timeOptions = [
   {
     label: "1 minute",
-    time: 1,
+    time: 60,
   },
   {
     label: "2 minute",
-    time: 2,
+    time: 120,
   },
   {
     label: "3 minute",
-    time: 3,
+    time: 180,
   },
   {
     label: "4 minute",
-    time: 4,
+    time: 240,
   },
   {
     label: "5 minute",
-    time: 5,
+    time: 300,
   },
 ];

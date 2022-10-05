@@ -1,14 +1,9 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
-import { MainContext } from "../../contexts/MainContext";
-import { useSetCurrentPage } from "../../hooks/useSetCurrentPage";
-import { speech } from "../../utils/speech";
+import React from "react";
 import { Page } from "./Page";
+import PropTypes from "prop-types";
 
 export const QuestionList = (props) => {
-  const { state, setState } = useContext(MainContext);
-  useSetCurrentPage(state, setState);
-  const handleClick = () => speech(props.title);
+  const handleClick = () => {};
   return <Page {...props} handleClick={handleClick} />;
 };
 

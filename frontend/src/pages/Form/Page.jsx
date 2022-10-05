@@ -121,8 +121,8 @@ export const Page = ({
                   fullWidth
                   size="large"
                   type="submit"
-                  variant="contained"
-                  disabled={!isCompleted}
+                  variant="outlined"
+                  // disabled={!isCompleted}
                 >
                   {currentLanguaje?.submit}
                 </Button>

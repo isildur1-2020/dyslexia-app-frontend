@@ -5,10 +5,11 @@ const initialState = {
   timePerQuestion: "",
   currentLanguaje: {},
   isAuth: false,
+  questions: [1, 2, 3, 4, 5, 6, 7],
+  currentQuestion: 1,
 };
 
 export const formReducer = (state = initialState, action) => {
-  const { loginForm } = state;
   switch (action.type) {
     case types.SET_LANGUAJE:
       return {
@@ -29,6 +30,23 @@ export const formReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuth: action.isAuth,
+      };
+    case types.SET_QUESTION_LIST:
+      return {
+        ...state,
+        questions: action.questions,
+      };
+    case types.SET_CURRENT_QUESTION:
+      return {
+        ...state,
+        currentQuestion: action.question,
+      };
+    case types.SET_REMOVE_QUESTION:
+      const question = Number(action.question);
+      const newQuestions = state.questions.filter((q) => q !== question);
+      return {
+        ...state,
+        questions: newQuestions,
       };
     default:
       return state;

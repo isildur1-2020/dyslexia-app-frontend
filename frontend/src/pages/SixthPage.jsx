@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { MainContext } from "../contexts/MainContext";
+import React from "react";
+import { useSelector } from "react-redux";
 import { QuestionList } from "../components/QuestionList/QuestionList";
 
 export const SixthPage = () => {
-  const { state } = useContext(MainContext);
-  const { currentLanguaje } = state;
+  const mainState = useSelector((s) => s?.formReducer);
+  const { currentLanguaje } = mainState;
   const { title6, list6, borderColor } = currentLanguaje;
   return (
     <QuestionList

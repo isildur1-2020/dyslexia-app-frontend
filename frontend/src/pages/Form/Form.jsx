@@ -25,7 +25,7 @@ export const Form = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if (!isCompleted) return;
+    // if (!isCompleted) return;
     dispatch(
       setUserForm({
         name: "",
