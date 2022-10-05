@@ -1,23 +1,12 @@
-import React, { useEffect, useRef, useContext } from "react";
-import { MainContext } from "../../contexts/MainContext";
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
 import { Page } from "./Page";
 
 export const Logo = () => {
   const logoRef = useRef();
   const navigate = useNavigate();
-  const { state, setState } = useContext(MainContext);
-  const { questions } = state;
-  const firstPage = !questions[0] ? "/sendData" : `/${questions[0]}`;
-  const currentQuestion = questions[0] ?? null;
 
-  const nextPage = () => {
-    setState({
-      ...state,
-      currentQuestion,
-    });
-    navigate(firstPage);
-  };
+  const nextPage = () => navigate("/1");
 
   const hiddenLogo = () => {
     logoRef.current.classList.remove("animate__fadeIn");

@@ -1,8 +1,8 @@
 import { types } from "../types/main";
 
 const initialState = {
-  languaje: "",
-  timePerQuestion: "",
+  languaje: "english",
+  timePerQuestion: 60,
   currentLanguaje: {},
   isAuth: false,
   questions: [1, 2, 3, 4, 5, 6, 7],

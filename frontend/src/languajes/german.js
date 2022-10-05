@@ -58,5 +58,5 @@ export const german = {
     "als wir alle gegangen sind, ist es nicht wahr Dies morgen Nach er kommt,",
     "meine drei jeden Tag gehen, kommt",
   ],
-  color7: "#FF1C20",
+  color7: "#F25252",
 };

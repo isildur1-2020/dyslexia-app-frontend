@@ -17,42 +17,45 @@ export const Clock = ({ clockID }) => {
   const dispatch = useDispatch();
   const { isNextPage, currentPage } = usePages();
   const clockState = useSelector((s) => s?.clocks);
-  const mainState = useSelector((s) => s?.formReducer);
+  const mainState = useSelector((s) => s?.mainState);
   const { seconds, intervalId } = clockState;
   const { questions, timePerQuestion } = mainState;
 
+  // // VERIFY IF THE PAGE IS ALLOWED
   // useEffect(() => {
-  //   const isAllowed = questions.some((q) => q === currentPage);
-  //   console.log(isAllowed, isNextPage);
+  //   // const isAllowed = questions.some((q) => q === currentPage);
+  //   // if (questions?.length === 0) return navigate("/sendData");
+  //   // if (!isAllowed) return navigate(`/${questions[0]}`);
   //   console.log(questions);
-  //   if (!isAllowed && isNextPage) navigate(`/${questions[0]}`);
   // }, []);
 
-  useEffect(() => {
-    if (isNextPage) navigate(`/${questions[0]}`);
-  }, [questions]);
+  // // OBSERVER TO CHANGE PAGE
+  // useEffect(() => {
+  //   if (isNextPage) navigate(`/${questions[0]}`);
+  // }, [questions]);
 
-  useEffect(() => {
-    if (seconds == 0) {
-      clearInterval(intervalId);
-      dispatch(setRemoveQuestion(clockID));
-    }
-  }, [seconds]);
+  // // OBSERVER WHEN TIME IS ZERO
+  // useEffect(() => {
+  //   if (seconds == 0) {
+  //     clearInterval(intervalId);
+  //     dispatch(setRemoveQuestion(clockID));
+  //   }
+  // }, [seconds]);
 
-  const setSeconds = () => dispatch(reduceClockSeconds());
+  // const setSeconds = () => dispatch(reduceClockSeconds());
 
-  // ACTIVE CLOCK
-  useEffect(() => {
-    if (intervalId === null) {
-      let id = setInterval(setSeconds, 1000);
-      dispatch(setIntervalId(id));
-    }
-  }, [timePerQuestion]);
+  // // ACTIVE CLOCK
+  // useEffect(() => {
+  //   if (intervalId === null) {
+  //     let id = setInterval(setSeconds, 1000);
+  //     dispatch(setIntervalId(id));
+  //   }
+  // }, [timePerQuestion]);
 
-  // ALWAYS SET TOTAL SECONDS
-  useEffect(() => {
-    dispatch(setTotalSeconds(timePerQuestion));
-  }, []);
+  // // ALWAYS SET TOTAL SECONDS
+  // useEffect(() => {
+  //   dispatch(setTotalSeconds(timePerQuestion));
+  // }, []);
 
   return <Page minutes={getMinutes(seconds)} seconds={getSeconds(seconds)} />;
 };

@@ -17,7 +17,7 @@ export const ChooseLang = () => {
   const dispatch = useDispatch();
   const { isMounted } = useIsMounted();
   const [langs, setLangs] = useState([]);
-  const state = useSelector((s) => s?.formReducer);
+  const state = useSelector((s) => s?.mainState);
 
   const handleClick = () => {
     const { languaje, timePerQuestion } = state;

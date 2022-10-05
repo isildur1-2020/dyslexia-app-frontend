@@ -10,7 +10,7 @@ export const Form = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isCompleted, setIsCompleted] = useState(false);
-  const mainState = useSelector((s) => s?.formReducer);
+  const mainState = useSelector((s) => s?.mainState);
   const formState = useSelector((s) => s?.userForm);
 
   const handleChange = ({ target }) => {

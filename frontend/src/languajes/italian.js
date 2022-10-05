@@ -58,5 +58,5 @@ export const italian = {
     "Dopo oggi, quando tutti noi siamo andati, non siamo venuti",
     "Questo è venuto a vedere i miei tre giorni andare a venire",
   ],
-  color7: "#FF1C20",
+  color7: "#F25252",
 };

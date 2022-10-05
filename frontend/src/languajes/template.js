@@ -38,5 +38,5 @@ export const template = {
   title7: "",
   content7: "",
   list7: false,
-  color7: "#FF1C20",
+  color7: "#F25252",
 };

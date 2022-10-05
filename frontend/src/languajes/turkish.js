@@ -62,5 +62,5 @@ export const turkish = {
     "portakal şimdi daha sonra genellikle köpekler kedi Scratch oynayabilirsiniz şimdi sadece 1 5 günlük ev penceresi gidiyor geliyor görebilirsiniz görmek",
     "isteyebilirsiniz gönderdim şeker her zaman sarı iyi seviyor ben bu senin için değil inanıyorum herkes Evet olabilir istiyor",
   ],
-  color7: "#FF1C20",
+  color7: "#F25252",
 };

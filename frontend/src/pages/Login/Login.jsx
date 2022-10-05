@@ -17,7 +17,7 @@ export const Login = () => {
     password: "",
   });
   const { handleChange } = useForm(form, setForm);
-  const state = useSelector((s) => s?.formReducer);
+  const state = useSelector((s) => s?.mainState);
   const [showPassword, setShowPassword] = useState(false);
 
   // handle show password text

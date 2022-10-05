@@ -50,5 +50,5 @@ export const spanish = {
   list7: [
     "El gato es un verdadero perro arriba abajo abajo arriba dólar el hombre se fue encima debajo de adentro hacia afuera y nos fuimos para abajo cuando puede ir ven más allá de sol rojo verde después de salir de casa antes de las clases el lunes el miércoles la moneda dólar a menudo puede ir venir a cada bosque jardín país creo pero no puede cantar escribir ir después rojo verde sin esta lectura todo el mundo tiene uno 5 debajo de la pared sobre el techo de lo que puede desear ver ir y juego rebajo dólar animales jugar gato perro vaya juego todos tienen diversión triste si rojo azul naranja ahora más adelante a menudo puede perros juego gatos rayar ahora se puede ver sólo unos cinco todos los días venía en el todos de la ventana de la casa que te gusta quiere que caramelos siempre amarillo bueno creo que esto no es para me de todo el mundo tiene puede ser así",
   ],
-  color7: "#FF1C20",
+  color7: "#F25252",
 };

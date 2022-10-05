@@ -1,16 +1,13 @@
-import React, { useRef, useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import styles from "./styles.module.scss";
-import { useContext } from "react";
-import { MainContext } from "../../contexts/MainContext";
 
 export const Canvas = (props) => {
   const canvas = useRef(null);
   const [drawing, setDrawing] = useState(false);
   const [position, setPosition] = useState(null);
-  const { state } = useContext(MainContext);
-  const { currentLanguaje } = state;
-  const [activeColor, setActiveColor] = useState(props.colors[0]);
+  const { currentLanguaje } = useSelector((s) => s?.mainState);
 
   const onDown = useCallback((event) => {
     const coordinates = getCoordinates(event);
@@ -91,10 +88,9 @@ export const Canvas = (props) => {
   return (
     <div className={styles.container}>
       <canvas
-        className={styles.Canvas}
         ref={canvas}
         style={{
-          border: `4px solid ${currentLanguaje.borderColor}`,
+          border: `4px solid ${currentLanguaje?.borderColor}`,
         }}
         onMouseDown={props.viewOnly ? undefined : onDown}
         onTouchStart={props.viewOnly ? undefined : onDown}
@@ -103,8 +99,8 @@ export const Canvas = (props) => {
         onMouseLeave={props.viewOnly ? undefined : onUp}
         onMouseMove={props.viewOnly ? undefined : onMove}
         onTouchMove={props.viewOnly ? undefined : onMove}
-        width={800}
-        height={300}
+        width={1240}
+        height={370}
       />
     </div>
   );

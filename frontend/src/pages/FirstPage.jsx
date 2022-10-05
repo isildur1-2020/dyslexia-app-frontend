@@ -9,7 +9,7 @@ export const FirstPage = ({
   startRecordingVideo,
   startRecordingScreen,
 }) => {
-  const mainState = useSelector((s) => s?.formReducer);
+  const mainState = useSelector((s) => s?.mainState);
   const { currentLanguaje } = mainState;
   const { title1, subtitle1 } = currentLanguaje;
 

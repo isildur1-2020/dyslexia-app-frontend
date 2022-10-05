@@ -7,7 +7,7 @@ export const usePages = () => {
   const currentPage = Number(location?.pathname?.[1]);
   const [isPrevPage, setIsPrevPage] = useState(false);
   const [isNextPage, setIsNextPage] = useState(false);
-  const mainState = useSelector((s) => s?.formReducer);
+  const mainState = useSelector((s) => s?.mainState);
   const { questions } = mainState;
 
   useEffect(() => {

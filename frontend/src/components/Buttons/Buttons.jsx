@@ -14,8 +14,14 @@ export const Buttons = () => {
   const handlePrev = () => {};
 
   const handleNext = () => {
-    clearInterval(intervalId);
-    dispatch(setRemoveQuestion(currentPage));
+    // clearInterval(intervalId);
+    // dispatch(setRemoveQuestion(currentPage));
+    navigate(`/${currentPage + 1}`);
+  };
+
+  const handleFinish = () => {
+    dispatch(setRemoveQuestion(7));
+    navigate("/sendData");
   };
 
   return (
@@ -24,7 +30,7 @@ export const Buttons = () => {
       isNextPage={isNextPage}
       handlePrev={handlePrev}
       handleNext={handleNext}
-      handleFinish={() => navigate("/sendData")}
+      handleFinish={handleFinish}
       isTheLastPage={currentPage === 7}
     />
   );

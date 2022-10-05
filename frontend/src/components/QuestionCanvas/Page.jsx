@@ -5,36 +5,38 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { Clock } from "../../components/Clock/Clock";
 import { Buttons } from "../../components/Buttons/Buttons";
-import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+
+const centerStyle = {
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
 export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
   <>
+    <Buttons />
     <Clock clockID={clockID} />
-    <Box mt={8}>
-      <Typography
-        align="center"
-        variant="h4"
-        component="h4"
-        sx={{ fontWeight: 600 }}
-      >
-        <Box>
+    <Box sx={centerStyle}>
+      <Box>
+        <Typography variant="h4" component="span" sx={{ fontWeight: 600 }}>
           <IconButton onClick={handleClick}>
-            <RecordVoiceOverIcon fontSize="large" color="primary" />
+            <VolumeUpIcon fontSize="large" color="primary" />
           </IconButton>
-        </Box>
-        {title}:
-      </Typography>
-      <Box mt={2}>
-        <Typography align="center" variant="h4" component="h4">
-          {subtitle}
+          {title}
         </Typography>
+        <Box mt={1}>
+          <Typography align="center" variant="h4" component="h4">
+            {subtitle}
+          </Typography>
+        </Box>
       </Box>
-    </Box>
-    <Box mt={4}>
-      <Canvas />
-    </Box>
-    <Box mt={1}>
-      <Buttons />
+      <Box mt={4}>
+        <Canvas />
+      </Box>
     </Box>
   </>
 );

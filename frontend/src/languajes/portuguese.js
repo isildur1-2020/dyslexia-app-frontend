@@ -66,5 +66,5 @@ export const portuguese = {
     "tarde, muitas vezes pode cães jogar gatos arranhar agora você pode ver apenas 1 5 todos os dias estava vindo indo na janela da casa e todos gosta",
     "de doces sempre amarelo bom eu acredito que isso não é para você me todo mundo tem quer pode ser Sim",
   ],
-  color7: "#FF1C20",
+  color7: "#F25252",
 };

@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
-import { MainContext } from "../contexts/MainContext";
+import React from "react";
 import { Navigate } from "react-router-dom";
 
 export const OnlyAdminRoute = ({ children }) => {
-  const { state } = useContext(MainContext);
-  const { isAdminAuth } = state;
-  if (!isAdminAuth) return <Navigate to="/login" />;
+  if (false) return <Navigate to="/login" />;
   return children;
 };

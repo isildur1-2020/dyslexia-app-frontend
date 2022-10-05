@@ -1,15 +1,15 @@
-import {
-  legacy_createStore as createStore,
-  combineReducers,
-} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { formReducer } from "./reducers/main";
 import { userFormReducer } from "./reducers/userForm";
 import { clocksReducer } from "./reducers/clocks";
 
-const reducers = combineReducers({
-  formReducer,
+const reducer = combineReducers({
+  mainState: formReducer,
   userForm: userFormReducer,
   clocks: clocksReducer,
 });
 
-export const store = createStore(reducers);
+export const store = configureStore({
+  reducer,
+  devTools: true,
+});

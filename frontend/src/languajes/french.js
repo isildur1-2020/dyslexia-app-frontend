@@ -62,5 +62,5 @@ export const french = {
     "travail dollar animaux jouer chat chien aller jouer tout le monde a plaisir triste Oui rouge bleu orange maintenant plus tard",
     "les chiens peuvent jouer à gratter maintenant vous pouvez voir seulement 1 5 tous les jours allait venir dans la fenêtre de la maison e hacun aime les bonbons chaque fois jaune bon",
   ],
-  color7: "#FF1C20",
+  color7: "#F25252",
 };
