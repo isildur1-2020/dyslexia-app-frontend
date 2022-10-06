@@ -11,12 +11,10 @@ export const Buttons = () => {
   const { isNextPage, currentPage } = usePages();
   const { intervalId } = useSelector((s) => s?.clocks);
 
-  const handlePrev = () => {};
-
   const handleNext = () => {
-    // clearInterval(intervalId);
-    // dispatch(setRemoveQuestion(currentPage));
-    navigate(`/${currentPage + 1}`);
+    console.log("CLEAR INTERVAL WITH BUTTON");
+    clearInterval(intervalId);
+    dispatch(setRemoveQuestion(currentPage));
   };
 
   const handleFinish = () => {
@@ -28,7 +26,7 @@ export const Buttons = () => {
     <Page
       finishText="Finish Exam"
       isNextPage={isNextPage}
-      handlePrev={handlePrev}
+      handlePrev={() => {}}
       handleNext={handleNext}
       handleFinish={handleFinish}
       isTheLastPage={currentPage === 7}

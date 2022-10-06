@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserForm } from "../../redux/actions/userForm";
 import { useIsMounted } from "../../hooks/useIsMounted";
@@ -26,25 +26,29 @@ export const Form = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     // if (!isCompleted) return;
-    dispatch(
-      setUserForm({
-        name: "",
-        age: "",
-        dateOfBirth: "",
-        nationality: "",
-        bloodType: "",
-        gender: "",
-      })
-    );
     navigate("/logo");
   };
 
-  // to enable or disable submit button
+  // TO ENABLE OR DISABLE SUBMIT BUTTON
   useEffect(() => {
     const values = Object.values(formState);
     const isFailed = values.some((el) => el === "");
     !isFailed && isMounted ? setIsCompleted(true) : setIsCompleted(false);
   }, [formState]);
+
+  // ALWAYS CLEAR FORM
+  useEffect(() => {
+    dispatch(
+      setUserForm({
+        age: "",
+        name: "",
+        gender: "",
+        bloodType: "",
+        dateOfBirth: "",
+        nationality: "",
+      })
+    );
+  }, []);
 
   return (
     <Page

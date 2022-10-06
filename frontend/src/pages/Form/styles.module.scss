@@ -1,11 +1,11 @@
 .Form {
-    height: calc(100% - 74px);
+  height: calc(100% - 74px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__container {
+    width: 300px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    &__container {
-        width: 300px;
-        display: flex;
-        flex-direction: column;
-    }
+    flex-direction: column;
+  }
 }

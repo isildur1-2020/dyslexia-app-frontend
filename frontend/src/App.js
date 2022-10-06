@@ -26,12 +26,27 @@ const App = () => {
     stopRecording: stopRecordingVideo,
     mediaBlobUrl: mediaBlobUrlVideo,
   } = useReactMediaRecorder({ video: true });
+
   const {
     status: statusScreen,
     startRecording: startRecordingScreen,
     stopRecording: stopRecordingScreen,
     mediaBlobUrl: mediaBlobUrlScreen,
   } = useReactMediaRecorder({ screen: true });
+
+  const startProps = {
+    statusVideo,
+    statusScreen,
+    startRecordingVideo,
+    startRecordingScreen,
+  };
+
+  const finishProps = {
+    stopRecordingVideo,
+    stopRecordingScreen,
+    mediaBlobUrlVideo,
+    mediaBlobUrlScreen,
+  };
 
   return (
     <Provider store={store}>
@@ -41,34 +56,14 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/form" element={<Form />} />
           <Route path="/logo" element={<Logo />} />
-          <Route
-            path="/1"
-            element={
-              <FirstPage
-                statusVideo={statusVideo}
-                statusScreen={statusScreen}
-                startRecordingVideo={startRecordingVideo}
-                startRecordingScreen={startRecordingScreen}
-              />
-            }
-          />
+          <Route path="/1" element={<FirstPage {...startProps} />} />
           <Route path="/2" element={<SecondPage />} />
           <Route path="/3" element={<ThirdPage />} />
           <Route path="/4" element={<FourthPage />} />
           <Route path="/5" element={<FifthPage />} />
           <Route path="/6" element={<SixthPage />} />
           <Route path="/7" element={<SeventhPage />} />
-          <Route
-            path="/sendData"
-            element={
-              <SendData
-                stopRecordingVideo={stopRecordingVideo}
-                stopRecordingScreen={stopRecordingScreen}
-                mediaBlobUrlVideo={mediaBlobUrlVideo}
-                mediaBlobUrlScreen={mediaBlobUrlScreen}
-              />
-            }
-          />
+          <Route path="/sendData" element={<SendData {...finishProps} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

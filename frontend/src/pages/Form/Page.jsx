@@ -5,9 +5,9 @@ import Input from "@mui/material/Input";
 import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
 import styles from "./styles.module.scss";
-import Divider from "@mui/material/Divider";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import Typography from "@mui/material/Typography";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 import { Layout } from "../../components/Layout/Layout";
@@ -23,17 +23,11 @@ export const Page = ({
   const { currentLanguaje } = mainState;
   const { name, age, dateOfBirth, nationality, bloodType, gender } = formState;
   return (
-    <Layout>
-      <Box mt={6}>
+    <Layout title="Complete the form">
+      <Box mt={8}>
         <div className={styles.Form}>
           <form onSubmit={handleSubmit}>
             <div className={styles.Form__container}>
-              <Box mb={8}>
-                <Typography align="center" variant="h5">
-                  Complete the form
-                </Typography>
-                <Divider />
-              </Box>
               <Box mb={2}>
                 <InputLabel htmlFor="user-name">
                   {currentLanguaje?.name}
@@ -88,16 +82,31 @@ export const Page = ({
                 <InputLabel htmlFor="user-bloodType">
                   {currentLanguaje?.bloodType}
                 </InputLabel>
-                <Input
-                  fullWidth
+                <Select
+                  displayEmpty
                   name="bloodType"
                   value={bloodType}
+                  variant="standard"
+                  sx={{ width: 300 }}
                   id="user-bloodType"
                   onChange={handleChange}
-                />
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="A+">A+</MenuItem>
+                  <MenuItem value="A-">A-</MenuItem>
+                  <MenuItem value="B+">B+</MenuItem>
+                  <MenuItem value="B-">B-</MenuItem>
+                  <MenuItem value="AB+">AB+</MenuItem>
+                  <MenuItem value="AB-">AB-</MenuItem>
+                  <MenuItem value="O+">O+</MenuItem>
+                  <MenuItem value="O-">O-</MenuItem>
+                </Select>
               </Box>
               <FormControl>
                 <RadioGroup
+                  row
                   name="gender"
                   value={gender}
                   onChange={handleChange}
@@ -116,7 +125,7 @@ export const Page = ({
                 </RadioGroup>
               </FormControl>
 
-              <Box mt={4} mb={8}>
+              <Box mt={3}>
                 <Button
                   fullWidth
                   size="large"
