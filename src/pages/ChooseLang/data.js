@@ -1,7 +1,7 @@
 export const timeOptions = [
   {
     label: "1 minute",
-    time: 8,
+    time: 60,
   },
   {
     label: "2 minute",

@@ -16,24 +16,23 @@ export const Clock = ({ clockID }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isNextPage } = usePages();
-  const clockState = useSelector((s) => s?.clocks);
+  const { seconds, intervalId } = useSelector((s) => s?.clocks);
   const mainState = useSelector((s) => s?.mainState);
-  const { seconds, intervalId } = clockState;
   const { questions, timePerQuestion } = mainState;
 
   // OBSERVER TO CHANGE PAGE
   useEffect(() => {
     const nextPage = questions?.[0];
     if (isNextPage) navigate(`/${nextPage}`);
-    if (nextPage === undefined) navigate(`/sendData`);
   }, [questions]);
 
   // OBSERVER WHEN TIME IS ZERO
   useEffect(() => {
-    if (seconds == 0) {
-      console.log("TIME EQUAL TO ZERO");
+    if (seconds === 0) {
       clearInterval(intervalId);
+      dispatch(setIntervalId(null));
       dispatch(setRemoveQuestion(clockID));
+      if (questions?.[0] === undefined) navigate(`/sendData`);
     }
   }, [seconds]);
 
@@ -41,10 +40,8 @@ export const Clock = ({ clockID }) => {
 
   // ACTIVE CLOCK
   useEffect(() => {
-    console.log("ACTIVING...");
     if (intervalId === null) {
-      console.log("INTERVAL NOT NULL");
-      let id = setInterval(setSeconds, 1000);
+      const id = setInterval(setSeconds, 1000);
       dispatch(setIntervalId(id));
     }
   }, [timePerQuestion]);
@@ -52,7 +49,10 @@ export const Clock = ({ clockID }) => {
   // ALWAYS SET TOTAL SECONDS
   useEffect(() => {
     dispatch(setTotalSeconds(timePerQuestion));
-    console.log("SET INIT SECONDS");
+    return () => {
+      clearInterval(intervalId);
+      dispatch(setIntervalId(null));
+    };
   }, []);
 
   return <Page minutes={getMinutes(seconds)} seconds={getSeconds(seconds)} />;
