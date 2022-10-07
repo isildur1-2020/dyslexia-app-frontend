@@ -89,7 +89,7 @@ export const Page = ({
                 size="large"
                 type="submit"
                 variant="outlined"
-                // disabled={username === "" || password === ""}
+                disabled={username === "" || password === ""}
               >
                 {currentLanguaje.submit}
               </Button>

@@ -15,11 +15,6 @@ export const setCurrentLanguaje = (lang) => ({
   lang,
 });
 
-export const setIsAuth = (isAuth) => ({
-  type: types.SET_IS_AUTH,
-  isAuth,
-});
-
 export const setQuestionList = (questions) => ({
   type: types.SET_QUESTION_LIST,
   questions,

@@ -1,11 +1,11 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { jwtToString } from "../../utils/jwt";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
+import { useDispatch, useSelector } from "react-redux";
 import { useIsMounted } from "../../hooks/useIsMounted";
-import { setIsAuth } from "../../redux/actions/main";
-import { BACK_URL } from "../../axios/axiosInstance";
+import { signinService } from "../../services/authService";
+import { setIsAuth, setIsAdmin, setUsername } from "../../redux/actions/user";
 import { Page } from "./Page";
 
 export const Login = () => {
@@ -29,18 +29,21 @@ export const Login = () => {
     try {
       ev.preventDefault();
       const { username, password } = form;
-      // if (username === "" || password === "") return;
-      // change this
-      navigate("/form");
+      if (username === "" || password === "") return;
       const data = {
         username,
         password,
       };
-      const { data: resp } = await axios.post(`${BACK_URL}/login`, data);
-      const { err, message, isAuth } = resp;
+      const resp = await signinService(data);
+      const { err, message, token } = resp;
       if (err) return console.log(message);
-      dispatch(setIsAuth(isAuth));
-      navigate("/form");
+      const payload = jwtToString(token);
+      dispatch(setIsAuth(true));
+      dispatch(setIsAdmin(payload?.isAdmin));
+      dispatch(setUsername(payload?.username));
+      localStorage.setItem("token", token);
+      localStorage.setItem("session", JSON.stringify(payload));
+      payload?.isAdmin ? navigate("/dashboard") : navigate("/form");
     } catch (err) {
       console.log(err);
     } finally {

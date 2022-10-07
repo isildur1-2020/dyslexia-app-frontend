@@ -4,7 +4,6 @@ const initialState = {
   languaje: "english",
   timePerQuestion: 240,
   currentLanguaje: {},
-  isAuth: false,
   questions: [1, 2, 3, 4, 5, 6, 7],
   currentQuestion: 1,
   showRecordModal: false,
@@ -26,11 +25,6 @@ export const formReducer = (state = initialState, action) => {
       return {
         ...state,
         currentLanguaje: action.lang,
-      };
-    case types.SET_IS_AUTH:
-      return {
-        ...state,
-        isAuth: action.isAuth,
       };
     case types.SET_QUESTION_LIST:
       return {
