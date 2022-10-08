@@ -1,4 +1,4 @@
-export const JSONheader = () => ({
+export const standardHeaders = () => ({
   "Content-Type": "application/json",
-  Authorization: "bearer bisnesmaste",
+  Authorization: localStorage.getItem("token"),
 });

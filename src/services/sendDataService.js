@@ -1,5 +1,5 @@
 import axios from "axios";
-import { JSONheader } from "../utils/headers";
+import { standardHeaders } from "../utils/headers";
 import { convertURLToBlob } from "../utils/sendData";
 import { BACK_URL } from "../axios/axiosInstance";
 
@@ -7,6 +7,7 @@ export const sendData = async (RECORD_URL) => {
   const URL = BACK_URL + "/upload";
   const headers = {
     "Content-Type": "multipart/form-data",
+    Authorization: localStorage.getItem("token"),
   };
   try {
     const blob = await convertURLToBlob(RECORD_URL);
@@ -23,7 +24,7 @@ export const sendEmailData = async (data) => {
   const URL = BACK_URL + "/data";
   try {
     await axios.post(URL, data, {
-      headers: JSONheader,
+      headers: standardHeaders(),
     });
   } catch (err) {
     console.log(err);

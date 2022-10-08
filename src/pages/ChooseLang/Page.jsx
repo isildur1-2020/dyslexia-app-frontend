@@ -36,10 +36,14 @@ export const Page = ({
         <Box style={containerStyle}>
           <Select
             fullWidth
+            displayEmpty
             name="languaje"
             value={languaje}
             onChange={handleLanguajeChange}
           >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {languajes.length > 0 &&
               languajes.map((lang) => (
                 <MenuItem key={lang} value={lang}>
@@ -65,11 +69,15 @@ export const Page = ({
             </Typography>
           </Box>
           <Select
+            displayEmpty
             sx={{ width: 300 }}
             name="secondsPerQuestion"
             onChange={handleTimeChange}
             value={timePerQuestion}
           >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {timeOptions.length > 0 &&
               timeOptions.map(({ label, time }) => (
                 <MenuItem key={time} value={time}>

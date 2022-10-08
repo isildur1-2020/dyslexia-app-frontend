@@ -1,9 +1,10 @@
 import { types } from "../types/main";
+import { languajes } from "../../languajes/languajes";
 
 const initialState = {
-  languaje: "english",
-  timePerQuestion: 240,
-  currentLanguaje: {},
+  languaje: "",
+  timePerQuestion: "",
+  currentLanguaje: languajes?.["english"],
   questions: [1, 2, 3, 4, 5, 6, 7],
   currentQuestion: 1,
   showRecordModal: false,

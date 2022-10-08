@@ -1,8 +1,10 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { UserInfo } from "./components/UserInfo";
 import { UserForm } from "./components/UserForm";
 import { Layout } from "../../components/Layout/Layout";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const centerStyle = {
   display: "flex",
@@ -12,15 +14,26 @@ const centerStyle = {
 
 export const Page = ({
   state,
-  handleChange,
-  handleSubmit,
   reload,
   setReload,
+  handleChange,
+  handleSubmit,
+  handleBackClick,
 }) => {
   return (
     <Layout>
       <Box sx={centerStyle}>
-        <Box mt={8}>
+        <Box my={4}>
+          <Button
+            disableElevation
+            variant="outlined"
+            onClick={handleBackClick}
+            startIcon={<ArrowBackIcon />}
+          >
+            Logout and back to login
+          </Button>
+        </Box>
+        <Box mt={2}>
           <UserForm
             state={state}
             handleChange={handleChange}

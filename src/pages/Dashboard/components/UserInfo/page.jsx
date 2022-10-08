@@ -30,7 +30,7 @@ export const Page = ({ clients, handleEdit, handleDelete }) => {
 
   return (
     <Box width={500} height={400}>
-      <DataGrid rows={clients} columns={columns} />
+      <DataGrid rows={clients ?? []} columns={columns} />
     </Box>
   );
 };

@@ -36,7 +36,10 @@ export const Login = () => {
       };
       const resp = await signinService(data);
       const { err, message, token } = resp;
-      if (err) return console.log(message);
+      if (err) {
+        console.log(message);
+        return alert(message);
+      }
       const payload = jwtToString(token);
       dispatch(setIsAuth(true));
       dispatch(setIsAdmin(payload?.isAdmin));

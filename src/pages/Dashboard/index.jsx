@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getUsername } from "../../utils/jwt";
+import { setIsAuth } from "../../redux/actions/user";
 import { createClient } from "../../services/adminService";
 import { Page } from "./page";
 
 export const Dashboard = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [reload, setReload] = useState(false);
   const [state, setState] = useState({
     username: "",
@@ -42,6 +47,12 @@ export const Dashboard = () => {
     }
   };
 
+  const handleBackClick = () => {
+    localStorage.clear();
+    dispatch(setIsAuth(false));
+    navigate("/login");
+  };
+
   return (
     <Page
       state={state}
@@ -49,6 +60,7 @@ export const Dashboard = () => {
       setReload={setReload}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
+      handleBackClick={handleBackClick}
     />
   );
 };

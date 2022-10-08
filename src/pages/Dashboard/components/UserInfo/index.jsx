@@ -26,8 +26,8 @@ export const UserInfo = ({ reload, setReload }) => {
 
   useEffect(() => {
     const getClients = async () => {
-      const { clientsFound } = await getClientsService(getUsername());
-      setClients(clientsFound);
+      const resp = await getClientsService(getUsername());
+      setClients(resp?.clientsFound);
     };
     getClients();
   }, [reload]);
