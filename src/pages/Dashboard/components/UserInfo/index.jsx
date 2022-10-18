@@ -12,7 +12,7 @@ export const UserInfo = ({ reload, setReload }) => {
 
   const handleEdit = async (username) => {
     const tests = prompt("New tests: ");
-    if (tests === isNaN) return;
+    if (tests === isNaN || tests === null) return;
     const { message } = await updateTestClient(username, tests);
     alert(message);
     setReload(!reload);

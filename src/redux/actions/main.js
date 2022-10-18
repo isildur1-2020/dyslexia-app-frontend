@@ -37,3 +37,17 @@ export const setShowRecordModal = () => ({
 export const setHideRecordModal = () => ({
   type: types.SET_HIDE_RECORD_MODAL,
 });
+
+export const setDataLanguajes = (data) => ({
+  type: types.SET_DATA_LANGUAJES,
+  data,
+});
+
+export const setLanguajeOptions = (options) => ({
+  type: types.SET_LANGUAJE_OPTIONS,
+  options,
+});
+
+export const reloadLanguajes = () => ({
+  type: types.RELOAD_LANGUAJES,
+});

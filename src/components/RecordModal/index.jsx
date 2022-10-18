@@ -26,9 +26,3 @@ Page.propTypes = {
   startText: PropTypes.string,
   handleStart: PropTypes.func,
 };
-
-Page.defaultProps = {
-  title: "Do you want to start the recording?",
-  cancelText: "Cancel",
-  startText: "Start",
-};

@@ -5,14 +5,24 @@ import { QuestionList } from "../components/QuestionList/QuestionList";
 export const FourthPage = () => {
   const mainState = useSelector((s) => s?.mainState);
   const { currentLanguaje } = mainState;
-  const { title2, list2, borderColor } = currentLanguaje;
+  const {
+    fourthQuestionTitle,
+    fourthQuestionOption1,
+    fourthQuestionOption2,
+    fourthQuestionOption3,
+    fourthQuestionOption4,
+  } = currentLanguaje;
   return (
     <QuestionList
       clockID={4}
-      list={list2}
-      title={title2}
-      borderColor={borderColor}
       backgroundColor="#83DDF7"
+      title={fourthQuestionTitle}
+      list={[
+        fourthQuestionOption1,
+        fourthQuestionOption2,
+        fourthQuestionOption3,
+        fourthQuestionOption4,
+      ]}
     />
   );
 };

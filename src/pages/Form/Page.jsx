@@ -30,7 +30,7 @@ export const Page = ({
             <div className={styles.Form__container}>
               <Box mb={2}>
                 <InputLabel htmlFor="user-name">
-                  {currentLanguaje?.name}
+                  {currentLanguaje?.formName}
                 </InputLabel>
                 <Input
                   fullWidth
@@ -42,7 +42,7 @@ export const Page = ({
               </Box>
               <Box mb={2}>
                 <InputLabel htmlFor="user-age">
-                  {currentLanguaje?.age}
+                  {currentLanguaje?.formAge}
                 </InputLabel>
                 <Input
                   fullWidth
@@ -55,7 +55,7 @@ export const Page = ({
               </Box>
               <Box mb={2}>
                 <InputLabel htmlFor="user-birth">
-                  {currentLanguaje?.birthday}
+                  {currentLanguaje?.formDateOfBirth}
                 </InputLabel>
                 <Input
                   fullWidth
@@ -68,7 +68,7 @@ export const Page = ({
               </Box>
               <Box mb={2}>
                 <InputLabel htmlFor="user-nationality">
-                  {currentLanguaje?.nationality}
+                  {currentLanguaje?.formNationality}
                 </InputLabel>
                 <Input
                   fullWidth
@@ -80,7 +80,7 @@ export const Page = ({
               </Box>
               <Box mb={2}>
                 <InputLabel htmlFor="user-bloodType">
-                  {currentLanguaje?.bloodType}
+                  {currentLanguaje?.formBloodType}
                 </InputLabel>
                 <Select
                   displayEmpty
@@ -115,12 +115,12 @@ export const Page = ({
                   <FormControlLabel
                     value="female"
                     control={<Radio />}
-                    label={currentLanguaje?.female}
+                    label={currentLanguaje?.formFemale}
                   />
                   <FormControlLabel
                     value="male"
                     control={<Radio />}
-                    label={currentLanguaje?.male}
+                    label={currentLanguaje?.formMale}
                   />
                 </RadioGroup>
               </FormControl>
@@ -131,9 +131,9 @@ export const Page = ({
                   size="large"
                   type="submit"
                   variant="outlined"
-                  // disabled={!isCompleted}
+                  disabled={!isCompleted}
                 >
-                  {currentLanguaje?.submit}
+                  {currentLanguaje?.loginNext}
                 </Button>
               </Box>
             </div>

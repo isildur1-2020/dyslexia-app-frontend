@@ -6,13 +6,12 @@ import { QuestionCanvas } from "../components/QuestionCanvas/QuestionCanvas";
 export const ThirdPage = () => {
   const mainState = useSelector((s) => s?.mainState);
   const { currentLanguaje } = mainState;
-  const { title3, subtitle3 } = currentLanguaje;
   return (
     <QuestionCanvas
       clockID={3}
-      title={title3}
-      subtitle={subtitle3}
       Canvas={CanvasClock}
+      title={currentLanguaje?.thirdQuestionTitle}
+      subtitle={currentLanguaje?.thirdQuestionSubtitle}
     />
   );
 };

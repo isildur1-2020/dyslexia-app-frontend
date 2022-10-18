@@ -13,7 +13,6 @@ export const FirstPage = ({
 }) => {
   const dispatch = useDispatch();
   const { currentLanguaje } = useSelector((s) => s?.mainState);
-  const { title1, subtitle1 } = currentLanguaje;
 
   const handleStart = () => {
     if (statusVideo !== "recording") startRecordingVideo();
@@ -28,12 +27,17 @@ export const FirstPage = ({
 
   return (
     <>
-      <RecordModal handleStart={handleStart} />
+      <RecordModal
+        handleStart={handleStart}
+        title={currentLanguaje?.recordPopupLabel}
+        cancelText={currentLanguaje?.recordPopupCancelLabel}
+        startText={currentLanguaje?.recordPopupStartLabel}
+      />
       <QuestionCanvas
         clockID={1}
-        title={title1}
         Canvas={Canvas}
-        subtitle={subtitle1}
+        title={currentLanguaje?.firstQuestionTitle}
+        subtitle={currentLanguaje?.firstQuestionSubtitle}
       />
     </>
   );

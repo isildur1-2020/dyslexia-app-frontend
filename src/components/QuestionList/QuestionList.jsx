@@ -10,7 +10,6 @@ export const QuestionList = (props) => {
 QuestionList.propTypes = {
   title: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.string),
-  borderColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   fontSize: PropTypes.string,
   textStyle: PropTypes.object,

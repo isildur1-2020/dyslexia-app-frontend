@@ -25,8 +25,8 @@ export const Form = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    // if (!isCompleted) return;
-    navigate("/logo");
+    if (!isCompleted) return;
+    navigate("/time");
   };
 
   // TO ENABLE OR DISABLE SUBMIT BUTTON

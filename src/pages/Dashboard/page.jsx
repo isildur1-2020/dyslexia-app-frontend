@@ -5,6 +5,7 @@ import { UserInfo } from "./components/UserInfo";
 import { UserForm } from "./components/UserForm";
 import { Layout } from "../../components/Layout/Layout";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { LanguajesForm } from "./components/LanguajesForm";
 
 const centerStyle = {
   display: "flex",
@@ -42,6 +43,9 @@ export const Page = ({
         </Box>
         <Box my={8}>
           <UserInfo reload={reload} setReload={setReload} />
+        </Box>
+        <Box mt={4} mb={20}>
+          <LanguajesForm />
         </Box>
       </Box>
     </Layout>

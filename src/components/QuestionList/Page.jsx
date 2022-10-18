@@ -14,12 +14,11 @@ export const Page = ({
   clockID,
   fontSize,
   textStyle,
-  borderColor,
   handleClick,
   backgroundColor,
 }) => {
   const rectStyle = {
-    border: `4px solid ${borderColor}`,
+    border: "4px solid #0048AC",
     backgroundColor: backgroundColor ?? "#fff",
   };
   const centerStyle = {
@@ -63,7 +62,6 @@ Page.propTypes = {
   fontSize: PropTypes.string,
   textStyle: PropTypes.object,
   handleClick: PropTypes.func,
-  borderColor: PropTypes.string,
   backgroundColor: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.string),
 };

@@ -13,6 +13,7 @@ import { SixthPage } from "./pages/SixthPage";
 import { SecondPage } from "./pages/SecondPage";
 import { FourthPage } from "./pages/FourthPage";
 import { UserRoute } from "./Routers/UserRoute";
+import { ChooseTime } from "./pages/ChooseTime";
 import { AdminRoute } from "./Routers/AdminRoute";
 import { SeventhPage } from "./pages/SeventhPage";
 import { SendData } from "./pages/SendData/SendData";
@@ -76,6 +77,14 @@ const App = () => {
             element={
               <UserRoute>
                 <Logo />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="/time"
+            element={
+              <UserRoute>
+                <ChooseTime />
               </UserRoute>
             }
           />

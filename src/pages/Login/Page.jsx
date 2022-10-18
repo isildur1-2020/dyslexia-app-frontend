@@ -40,13 +40,13 @@ export const Page = ({
               </Avatar>
               <Box mt={2}>
                 <Typography component="span" variant="h5">
-                  Login
+                  {currentLanguaje?.loginTitle}
                 </Typography>
               </Box>
             </Box>
             <Box mb={4}>
               <InputLabel htmlFor="user-username">
-                {currentLanguaje.user}
+                {currentLanguaje?.loginUser}
               </InputLabel>
               <Input
                 fullWidth
@@ -58,7 +58,7 @@ export const Page = ({
             </Box>
             <Box>
               <InputLabel htmlFor="user-password">
-                {currentLanguaje.password}
+                {currentLanguaje?.loginPassword}
               </InputLabel>
               <Input
                 fullWidth
@@ -91,7 +91,7 @@ export const Page = ({
                 variant="outlined"
                 disabled={username === "" || password === ""}
               >
-                {currentLanguaje.submit}
+                {currentLanguaje?.loginNext}
               </Button>
             </Box>
           </div>
