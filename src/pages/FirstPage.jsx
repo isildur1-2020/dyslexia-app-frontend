@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { jwtToString } from "../utils/jwt";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Canvas } from "../components/Canvas/Canvas";
 import { RecordModal } from "../components/RecordModal";
@@ -11,6 +13,7 @@ export const FirstPage = ({
   startRecordingVideo,
   startRecordingScreen,
 }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { currentLanguaje } = useSelector((s) => s?.mainState);
 
@@ -21,6 +24,14 @@ export const FirstPage = ({
   };
 
   useEffect(() => {
+    const currentTests = jwtToString(localStorage.getItem("token"));
+    console.log(currentTests);
+    if (currentTests?.tests <= 0) {
+      alert("Insufficient tests");
+      navigate("/");
+      navigate(0);
+      return;
+    }
     if (statusVideo !== "recording" && statusScreen !== "recording")
       dispatch(setShowRecordModal());
   }, []);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { standardHeaders } from "../utils/headers";
 import { BACK_URL } from "../axios/axiosInstance";
+import { getUsername } from "../utils/jwt";
 
 export const createClient = async (data) => {
   try {
@@ -42,6 +43,16 @@ export const deleteClient = async (username) => {
   try {
     const URL = `${BACK_URL}/api/client/${username}`;
     const { data } = await axios.delete(URL, { headers: standardHeaders() });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateTestService = async () => {
+  try {
+    const URL = `${BACK_URL}/api/admin/${getUsername()}`;
+    const { data } = await axios.post(URL, { headers: standardHeaders() });
     return data;
   } catch (err) {
     console.log(err);

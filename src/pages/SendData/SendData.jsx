@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACK_URL } from "../../axios/axiosInstance";
 import { useSelector, useDispatch } from "react-redux";
+import { updateTestService } from "../../services/adminService";
 import {
   setEmailSended,
   clearRecordInfo,
@@ -25,9 +26,15 @@ export const SendData = ({
   const sendDataState = useSelector((s) => s?.sendDataState);
   const { isCameraRecordSend, isScreenRecordSend, isEmailSend } = sendDataState;
 
+  const updateTest = async () => {
+    const resp = await updateTestService();
+    console.log(resp);
+  };
+
   useEffect(() => {
     if (!isEmailSend) return;
     dispatch(clearRecordInfo());
+    updateTest();
     navigate("/");
     navigate(0);
   }, [isEmailSend]);
