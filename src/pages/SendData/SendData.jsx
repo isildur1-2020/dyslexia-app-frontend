@@ -28,7 +28,8 @@ export const SendData = ({
   useEffect(() => {
     if (!isEmailSend) return;
     dispatch(clearRecordInfo());
-    navigate("/form");
+    navigate("/");
+    navigate(0);
   }, [isEmailSend]);
 
   // SEND EMAIL

@@ -12,6 +12,7 @@ export const SixthPage = () => {
       backgroundColor="#6FFB71"
       list={[currentLanguaje?.sixthQuestionText]}
       title={currentLanguaje?.sixthQuestionTitle}
+      audioSrc={currentLanguaje?.audioSixthQuestion}
       textStyle={{
         fontWeight: 300,
         fontSize: 24,

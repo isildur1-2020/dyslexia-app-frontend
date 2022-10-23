@@ -10,6 +10,8 @@ export const SecondPage = () => {
     secondQuestionOption2,
     secondQuestionOption3,
     secondQuestionOption4,
+    secondQuestionTitle,
+    audioSecondQuestion,
   } = currentLanguaje;
   return (
     <QuestionList
@@ -20,7 +22,8 @@ export const SecondPage = () => {
         secondQuestionOption3,
         secondQuestionOption4,
       ]}
-      title={currentLanguaje?.secondQuestionTitle}
+      title={secondQuestionTitle}
+      audioSrc={audioSecondQuestion}
     />
   );
 };

@@ -24,6 +24,8 @@ export const UserInfo = ({ reload, setReload }) => {
     setReload(!reload);
   };
 
+  // ==============================
+  //  GET ALL CLIENTS
   useEffect(() => {
     const getClients = async () => {
       const resp = await getClientsService(getUsername());
@@ -31,6 +33,7 @@ export const UserInfo = ({ reload, setReload }) => {
     };
     getClients();
   }, [reload]);
+
   return (
     <Page
       clients={clients}

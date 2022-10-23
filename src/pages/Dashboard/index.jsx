@@ -1,65 +1,106 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { getUsername } from "../../utils/jwt";
+import React, { useState, useEffect } from "react";
 import { setIsAuth } from "../../redux/actions/user";
-import { createClient } from "../../services/adminService";
+import { useDispatch, useSelector } from "react-redux";
+import { reloadLanguajes } from "../../redux/actions/main";
+import { updateLanguaje } from "../../services/languajeService";
 import { Page } from "./page";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [reload, setReload] = useState(false);
+  const mainState = useSelector((s) => s?.mainState);
+  const { languaje, currentLanguaje } = mainState;
+
   const [state, setState] = useState({
-    username: "",
-    password: "",
-    tests: 0,
+    loginTitle: "",
+    loginUser: "",
+    loginPassword: "",
+    loginNext: "",
+    // ========================
+    formName: "",
+    formAge: "",
+    formDateOfBirth: "",
+    formNationality: "",
+    formBloodType: "",
+    formFemale: "",
+    formMale: "",
+    // ========================
+    timeTitle: "",
+    timeMinutesLabel: "",
+    // ========================
+    recordPopupLabel: "",
+    recordPopupCancelLabel: "",
+    recordPopupStartLabel: "",
+    // ========================
+    firstQuestionTitle: "",
+    firstQuestionSubtitle: "",
+    // ========================
+    secondQuestionTitle: "",
+    secondQuestionOption1: "",
+    secondQuestionOption2: "",
+    secondQuestionOption3: "",
+    secondQuestionOption4: "",
+    // ========================
+    thirdQuestionTitle: "",
+    thirdQuestionSubtitle: "",
+    // ========================
+    fourthQuestionTitle: "",
+    fourthQuestionOption1: "",
+    fourthQuestionOption2: "",
+    fourthQuestionOption3: "",
+    fourthQuestionOption4: "",
+    // ========================
+    fifthQuestionTitle: "",
+    fifthQuestionSubtitle: "",
+    // ========================
+    sixthQuestionTitle: "",
+    sixthQuestionText: "",
+    // ========================
+    seventhQuestionTitle: "",
+    seventhQuestionText: "",
+    // ========================
+    audioFirstQuestion: "",
+    audioSecondQuestion: "",
+    audioThridQuestion: "",
+    audioFourthQuestion: "",
+    audioFifthQuestion: "",
+    audioSixthQuestion: "",
+    audioSeventhQuestion: "",
   });
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
+  const { handleChange } = useForm(state, setState);
 
   const handleSubmit = async (ev) => {
-    try {
-      ev.preventDefault();
-      const { username, password } = state;
-      if (!username || !password) return;
-      const data = {
-        ...state,
-        group_id: getUsername(),
-      };
-      const { err, message } = await createClient(data);
-      alert(message);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setState({
-        username: "",
-        password: "",
-        tests: 0,
-      });
-      setReload((s) => !s);
-    }
+    ev.preventDefault();
+    const resp = await updateLanguaje(languaje, state);
+    dispatch(reloadLanguajes());
+    alert(resp?.message);
   };
 
+  // ===============================
+  // TO LOGOUT
   const handleBackClick = () => {
     localStorage.clear();
     dispatch(setIsAuth(false));
     navigate("/login");
   };
 
+  // ===============================
+  // TO CHANGE CURRENT LANGUAJE INFO
+  useEffect(() => {
+    setState(currentLanguaje);
+  }, [languaje]);
+
   return (
     <Page
       state={state}
       reload={reload}
       setReload={setReload}
-      handleChange={handleChange}
       handleSubmit={handleSubmit}
+      handleChange={handleChange}
       handleBackClick={handleBackClick}
     />
   );

@@ -1,68 +1,49 @@
-import React from "react";
 import PropTypes from "prop-types";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
+import { useForm } from "../../../../hooks/useForm";
+import { getUsername } from "../../../../utils/jwt";
+import { createClient } from "../../../../services/adminService";
+import { Page } from "./page";
 
-export const UserForm = ({ state, handleChange, handleSubmit }) => {
-  const { username, password, tests } = state;
+export const UserForm = ({ setReload }) => {
+  const [state, setState] = useState({
+    username: "",
+    password: "",
+    tests: 0,
+  });
+  const { handleChange } = useForm(state, setState);
+
+  const handleSubmit = async (ev) => {
+    try {
+      ev.preventDefault();
+      const { username, password } = state;
+      if (!username || !password) return;
+      const data = {
+        ...state,
+        group_id: getUsername(),
+      };
+      const { err, message } = await createClient(data);
+      alert(message);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setState({
+        username: "",
+        password: "",
+        tests: 0,
+      });
+      setReload((s) => !s);
+    }
+  };
   return (
-    <form onSubmit={handleSubmit}>
-      <Box width={250}>
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            id="username"
-            name="username"
-            label="Username"
-            value={username}
-            variant="outlined"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            label="Password"
-            value={password}
-            variant="outlined"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box mb={3}>
-          <TextField
-            fullWidth
-            id="tests"
-            name="tests"
-            label="Tests"
-            type="number"
-            value={tests}
-            variant="outlined"
-            onChange={handleChange}
-          />
-        </Box>
-        <Box>
-          <Button
-            fullWidth
-            type="submit"
-            variant="outlined"
-            disabled={!username || !password}
-          >
-            create user
-          </Button>
-        </Box>
-      </Box>
-    </form>
+    <Page
+      state={state}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 
 UserForm.propTypes = {
-  state: PropTypes.shape({
-    username: PropTypes.string,
-    password: PropTypes.string,
-  }),
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
+  reload: PropTypes.bool,
 };

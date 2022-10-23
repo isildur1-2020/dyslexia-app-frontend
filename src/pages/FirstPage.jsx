@@ -37,6 +37,7 @@ export const FirstPage = ({
         clockID={1}
         Canvas={Canvas}
         title={currentLanguaje?.firstQuestionTitle}
+        audioSrc={currentLanguaje?.audioFirstQuestion}
         subtitle={currentLanguaje?.firstQuestionSubtitle}
       />
     </>

@@ -11,6 +11,7 @@ export const ThirdPage = () => {
       clockID={3}
       Canvas={CanvasClock}
       title={currentLanguaje?.thirdQuestionTitle}
+      audioSrc={currentLanguaje?.audioThridQuestion}
       subtitle={currentLanguaje?.thirdQuestionSubtitle}
     />
   );

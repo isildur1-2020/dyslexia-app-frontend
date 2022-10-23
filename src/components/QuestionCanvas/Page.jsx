@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { Clock } from "../../components/Clock/Clock";
+import { AudioButton } from "../../components/AudioButton";
 import { Buttons } from "../../components/Buttons/Buttons";
-import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 
 const centerStyle = {
   width: "100vw",
@@ -16,16 +15,14 @@ const centerStyle = {
   justifyContent: "center",
 };
 
-export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
+export const Page = ({ title, subtitle, Canvas, clockID, audioSrc }) => (
   <>
     <Buttons />
     <Clock clockID={clockID} />
     <Box sx={centerStyle}>
       <Box>
         <Typography variant="h4" component="span" sx={{ fontWeight: 600 }}>
-          <IconButton onClick={handleClick}>
-            <VolumeUpIcon fontSize="large" color="primary" />
-          </IconButton>
+          <AudioButton audioSrc={audioSrc} />
           {title}
         </Typography>
         <Box>
@@ -44,7 +41,8 @@ export const Page = ({ title, subtitle, Canvas, clockID, handleClick }) => (
 Page.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  Canvas: PropTypes.elementType.isRequired,
-  clockID: PropTypes.number.isRequired,
+  audioSrc: PropTypes.string,
   handleClick: PropTypes.func,
+  clockID: PropTypes.number.isRequired,
+  Canvas: PropTypes.elementType.isRequired,
 };

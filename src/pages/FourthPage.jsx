@@ -11,12 +11,14 @@ export const FourthPage = () => {
     fourthQuestionOption2,
     fourthQuestionOption3,
     fourthQuestionOption4,
+    audioFourthQuestion,
   } = currentLanguaje;
   return (
     <QuestionList
       clockID={4}
       backgroundColor="#83DDF7"
       title={fourthQuestionTitle}
+      audioSrc={audioFourthQuestion}
       list={[
         fourthQuestionOption1,
         fourthQuestionOption2,

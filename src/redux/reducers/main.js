@@ -9,7 +9,7 @@ const initialState = {
   showRecordModal: false,
   dataLanguajes: {},
   languajeOptions: [],
-  reloadLanguajes: new Date(),
+  reloadLanguajes: false,
 };
 
 export const formReducer = (state = initialState, action) => {
@@ -69,8 +69,9 @@ export const formReducer = (state = initialState, action) => {
     case types.RELOAD_LANGUAJES:
       return {
         ...state,
-        reloadLanguajes: new Date(),
+        reloadLanguajes: !state.reloadLanguajes,
       };
+
     default:
       return state;
   }

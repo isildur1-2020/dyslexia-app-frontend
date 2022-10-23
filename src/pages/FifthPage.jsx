@@ -11,6 +11,7 @@ export const FifthPage = () => {
       clockID={5}
       Canvas={Canvas}
       title={currentLanguaje?.fifthQuestionTitle}
+      audioSrc={currentLanguaje?.audioFifthQuestion}
       subtitle={currentLanguaje?.fifthQuestionSubtitle}
     />
   );

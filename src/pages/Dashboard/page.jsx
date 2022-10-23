@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { UserInfo } from "./components/UserInfo";
 import { UserForm } from "./components/UserForm";
+import { SoundsForm } from "./components/SoundsForm";
 import { Layout } from "../../components/Layout/Layout";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { LanguajesForm } from "./components/LanguajesForm";
@@ -35,19 +37,35 @@ export const Page = ({
           </Button>
         </Box>
         <Box mt={2}>
-          <UserForm
+          <UserForm setReload={setReload} />
+        </Box>
+        <Box my={8}>
+          <UserInfo reload={reload} setReload={setReload} />
+        </Box>
+        <Box mt={4} mb={8}>
+          <LanguajesForm
             state={state}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
           />
         </Box>
-        <Box my={8}>
-          <UserInfo reload={reload} setReload={setReload} />
-        </Box>
-        <Box mt={4} mb={20}>
-          <LanguajesForm />
+        <Box mt={4} mb={16}>
+          <SoundsForm
+            state={state}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
         </Box>
       </Box>
     </Layout>
   );
+};
+
+Page.propTypes = {
+  reload: PropTypes.bool,
+  state: PropTypes.object,
+  setReload: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  handleBackClick: PropTypes.func,
 };

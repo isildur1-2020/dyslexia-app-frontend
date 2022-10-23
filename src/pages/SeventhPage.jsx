@@ -11,6 +11,7 @@ export const SeventhPage = () => {
       backgroundColor="#F25252"
       list={[currentLanguaje?.seventhQuestionText]}
       title={currentLanguaje?.seventhQuestionTitle}
+      audioSrc={currentLanguaje?.audioSeventhQuestion}
       fontSize="body1"
       textStyle={{
         fontWeight: 300,

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -423,3 +424,9 @@ export const Page = ({ state, handleChange, handleSubmit }) => (
     </form>
   </Box>
 );
+
+Page.propTypes = {
+  state: PropTypes.object,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
