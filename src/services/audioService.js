@@ -10,3 +10,13 @@ export const getAudiosService = async () => {
     console.log(err);
   }
 };
+
+export const uploadAudio = async (data) => {
+  try {
+    const URL = `${BACK_URL}/api/audio`;
+    const { data: resp } = await axios.post(URL, data);
+    return resp;
+  } catch (err) {
+    console.log(err);
+  }
+};

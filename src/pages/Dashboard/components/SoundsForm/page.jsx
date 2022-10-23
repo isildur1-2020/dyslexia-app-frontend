@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import SaveIcon from "@mui/icons-material/Save";
 import Typography from "@mui/material/Typography";
 import UploadIcon from "@mui/icons-material/Upload";
 import { Languajes } from "../../../../components/Languajes";
@@ -11,9 +12,11 @@ import { Languajes } from "../../../../components/Languajes";
 export const Page = ({
   state,
   audios,
+  existsFile,
   handleChange,
   handleSubmit,
   handleUploadFile,
+  handleFileChange,
 }) => {
   const AudioOption = ({ title, name, value }) => (
     <Box>
@@ -62,18 +65,36 @@ export const Page = ({
           <Languajes />
         </Box>
         <Box mb={4}>
-          <Button
-            fullWidth
-            size="large"
-            color="success"
-            component="label"
-            variant="outlined"
-            onClick={handleUploadFile}
-            endIcon={<UploadIcon />}
-          >
-            UPLOAD AUDIO
-            <input hidden type="file" />
-          </Button>
+          {!existsFile ? (
+            <Button
+              fullWidth
+              size="large"
+              color="primary"
+              component="label"
+              variant="outlined"
+              endIcon={<UploadIcon />}
+            >
+              Please, select an audio
+              <input
+                hidden
+                type="file"
+                accept="audio/*"
+                onChange={handleFileChange}
+              />
+            </Button>
+          ) : (
+            <Button
+              fullWidth
+              size="large"
+              color="success"
+              component="label"
+              variant="outlined"
+              endIcon={<SaveIcon />}
+              onClick={handleUploadFile}
+            >
+              Save audio
+            </Button>
+          )}
         </Box>
         <Box display="flex" flexWrap="wrap" columnGap={2}>
           <AudioOption
@@ -122,8 +143,10 @@ export const Page = ({
 
 Page.propTypes = {
   state: PropTypes.object,
+  existsFile: PropTypes.bool,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   handleUploadFile: PropTypes.func,
+  handleFileChange: PropTypes.func,
   audios: PropTypes.arrayOf(PropTypes.string),
 };
