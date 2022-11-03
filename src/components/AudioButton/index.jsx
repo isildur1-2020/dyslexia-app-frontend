@@ -18,7 +18,7 @@ export const AudioButton = ({ audioSrc }) => {
     setIsPlay(false);
   };
 
-  const src = `${BACK_URL}/audios/${audioSrc}`;
+  const src = `${BACK_URL}/api/static/audios/${audioSrc}`;
 
   return (
     <>

@@ -57,8 +57,9 @@ export const SendData = ({
     if (isCameraRecordSend) return;
     const sendRecord = async () => {
       const { data } = await sendData(mediaBlobUrlVideo);
+      const URL_VIDEO = `${BACK_URL}/api/static/videos/${data?.URL}`;
       dispatch(setCameraRecordSended());
-      dispatch(setCameraRecordLink(BACK_URL + data?.URL));
+      dispatch(setCameraRecordLink(URL_VIDEO));
     };
     sendRecord();
   }, [mediaBlobUrlVideo]);
@@ -69,8 +70,9 @@ export const SendData = ({
     if (isScreenRecordSend) return;
     const sendRecord = async () => {
       const { data } = await sendData(mediaBlobUrlScreen);
+      const URL_VIDEO = `${BACK_URL}/api/static/videos/${data?.URL}`;
       dispatch(setScreenRecordSended());
-      dispatch(setScreenRecordLink(BACK_URL + data?.URL));
+      dispatch(setScreenRecordLink(URL_VIDEO));
     };
     sendRecord();
   }, [mediaBlobUrlScreen]);
